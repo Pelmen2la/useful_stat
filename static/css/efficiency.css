@@ -1,0 +1,184 @@
+/* Reset CSS */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+button:focus,
+input:focus,
+select:focus,
+textarea:focus{
+    outline: 0;
+}
+/* /Reset CSS */
+
+
+html,
+body,
+div#Root {
+    height: 100%;
+}
+
+span.icon {
+    display: inline-block;
+    background-size: cover;
+}
+
+span.icon.time {
+    background-image: url('/resources/images/icons/svg/time.svg');
+}
+
+span.icon.perfomance {
+    background-image: url('/resources/images/icons/svg/performance.svg');
+}
+
+span.icon.close {
+    background-image: url('/resources/images/icons/svg/close.svg');
+}
+
+.efficiency-main-container {
+    position: relative;
+    box-sizing: border-box;
+    border: 4px solid black;
+    border-radius: 10px;
+    height: 100%;
+    background-color: white;
+}
+
+.efficiency-main-container .grid-layout-item {
+    width: 20%;
+    height: 20%;
+    border: 1px dashed black;
+    position: absolute;
+    z-index: 0;
+}
+
+.efficiency-main-container .card {
+    position: absolute;
+    width: 20%;
+    max-height: 5.6em;
+    font-size: 40px;
+    border: 5px solid #14A3E9;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: white;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.efficiency-main-container .card p {
+    line-height: 1.2em;
+    height: 3.6em;
+    word-break: break-all;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.efficiency-main-container .card .param-block {
+    padding-top: 0.5em;
+    width: 50%;
+    display: inline-block;
+}
+
+.efficiency-main-container .card .param-block .icon {
+    width: 1em;
+    height: 1em;
+    margin-right: 5px;
+}
+
+.popup-wrapper {
+    position: fixed;
+    display: table;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.popup-wrapper .mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.5;
+    background-color: #CCCCCC;;
+}
+
+.popup-wrapper .content-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.popup-wrapper .content-wrapper > div {
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.efficiency-card-form {
+    font-size: 60px;
+    max-height: 90%;
+    border: 5px solid #14A3E9;
+    padding: 0.5em 1.2em;
+    box-sizing: border-box;
+    background: white;
+}
+
+.efficiency-card-form span.icon.close {
+    position: absolute;
+    right: 0.1em;
+    top: 0.1em;
+    height: 1em;
+    width: 1em;
+    opacity: 0.8;
+    background-color: white;
+}
+
+.efficiency-card-form .rating-control span.icon {
+    opacity: 0.3;
+    width: 1em;
+    height: 1em;
+    margin: 0.5em 0.5em 0.5em 0;
+}
+
+.efficiency-card-form .rating-control span.icon.selected {
+    opacity: 1;
+}
