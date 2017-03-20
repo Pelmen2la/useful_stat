@@ -16,9 +16,6 @@ socket.on('connect', function() {
             oldCards = oldState ? oldState.get('cards') : null;
 
         state.cards.forEach(function(c) {
-            if(oldCards) {
-                c.isFormVisible = oldCards.find((oc) => oc.get('id') === c.id).get('isFormVisible');
-            }
             c.timeCostRate = utils.getGraphCardPropertyCash(c.id, 'timeCost');
             c.efficiencyRate = utils.getGraphCardPropertyCash(c.id, 'efficiency');
         });

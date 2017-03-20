@@ -19,8 +19,8 @@ function setCardProperty(state, cardId, propertyName, val) {
     return state;
 };
 
-function setCardFormIsOpen(state, cardId, val) {
-    return setCardProperty(state, cardId, 'isFormVisible', val);
+function setOpenedCardId(state, cardId) {
+    return state.set('openedCardId', cardId);
 };
 
 function setCardRateProperty(state, cardId, propertyName, val) {
@@ -41,8 +41,8 @@ export default function(state = Map(), action) {
             return setState(state, action.state);
         case 'RANDOMIZE_RATES':
             return randomizeRates(state, action.entry);
-        case 'SET_CARD_FORM_IS_OPEN':
-            return setCardFormIsOpen(state, action.cardId, action.val);
+        case 'SET_OPENED_CARD':
+            return setOpenedCardId(state, action.cardId);
         case 'SET_CARD_PROPERTY_RATE':
             return setCardRateProperty(state, action.cardId, action.propertyName, action.val);
   }

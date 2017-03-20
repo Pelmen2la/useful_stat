@@ -12,11 +12,10 @@ export function randomizeRates(entry) {
     };
 }
 
-export function setCardFormIsOpen(cardId, val) {
+export function setOpenedCardId (cardId) {
     return {
-        type: 'SET_CARD_FORM_IS_OPEN',
-        cardId,
-        val
+        type: 'SET_OPENED_CARD',
+        cardId
     };
 }
 
