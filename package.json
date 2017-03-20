@@ -1,7 +1,6 @@
 {
-  "name": "retroservice",
+  "name": "useful_stat",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "webpackwatch": "webpack --progress --colors --watch"
@@ -15,6 +14,7 @@
     "babel-preset-react": "^6.23.0",
     "body-parser": "^1.17.1",
     "compression": "^1.6.2",
+    "cookie": "^0.3.1",
     "express": "^4.15.0",
     "immutable": "^3.8.1",
     "mongoose": "^4.8.6",
@@ -27,5 +27,15 @@
     "socket.io": "^1.7.3",
     "socket.io-client": "^1.7.3",
     "webpack": "^2.2.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pelmen2la/useful_stat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Pelmen2la/useful_stat/issues"
+  },
+  "homepage": "https://github.com/Pelmen2la/useful_stat#readme",
+  "description": ""
 }
