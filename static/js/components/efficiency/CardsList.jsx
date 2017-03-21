@@ -8,7 +8,7 @@ export default React.createClass({
             cardItems = cards.map(function(c, i) {
                 let id = c.get('id');
                 return <div className="item" key={id}>
-                    <span>
+                    <span className="text">
                         {c.get('title')}
                     </span>
                     <span className={"icon " + (c.get('isHidden') ? 'hidden' : 'visible')}

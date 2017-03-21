@@ -38543,7 +38543,7 @@ exports.default = _react2.default.createClass({
                 { className: 'item', key: id },
                 _react2.default.createElement(
                     'span',
-                    null,
+                    { className: 'text' },
                     c.get('title')
                 ),
                 _react2.default.createElement('span', { className: "icon " + (c.get('isHidden') ? 'hidden' : 'visible'),
