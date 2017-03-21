@@ -12,9 +12,23 @@ export function randomizeRates(entry) {
     };
 }
 
-export function setOpenedCardId (cardId) {
+export function setOpenedCardId(cardId) {
     return {
         type: 'SET_OPENED_CARD',
+        cardId
+    };
+}
+
+export function setCardListVisibility(isVisible) {
+    return {
+        type: 'SET_CARD_LIST_VISIBILITY',
+        isVisible
+    };
+}
+
+export function toggleCardVisibility(cardId) {
+    return {
+        type: 'TOGGLE_CARD_VISIBILITY',
         cardId
     };
 }

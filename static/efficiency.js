@@ -8803,6 +8803,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.setState = setState;
 exports.randomizeRates = randomizeRates;
 exports.setOpenedCardId = setOpenedCardId;
+exports.setCardListVisibility = setCardListVisibility;
+exports.toggleCardVisibility = toggleCardVisibility;
 exports.setCardPropertyRate = setCardPropertyRate;
 function setState(state) {
     return {
@@ -8821,6 +8823,20 @@ function randomizeRates(entry) {
 function setOpenedCardId(cardId) {
     return {
         type: 'SET_OPENED_CARD',
+        cardId: cardId
+    };
+}
+
+function setCardListVisibility(isVisible) {
+    return {
+        type: 'SET_CARD_LIST_VISIBILITY',
+        isVisible: isVisible
+    };
+}
+
+function toggleCardVisibility(cardId) {
+    return {
+        type: 'TOGGLE_CARD_VISIBILITY',
         cardId: cardId
     };
 }
@@ -14152,6 +14168,10 @@ var _RatingControl = __webpack_require__(125);
 
 var _RatingControl2 = _interopRequireDefault(_RatingControl);
 
+var _FullScreenPopup = __webpack_require__(294);
+
+var _FullScreenPopup2 = _interopRequireDefault(_FullScreenPopup);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _react2.default.createClass({
@@ -14159,37 +14179,26 @@ exports.default = _react2.default.createClass({
 
     render: function render() {
         var props = this.props,
-            data = this.props.data;
-
-        return _react2.default.createElement(
+            data = this.props.data,
+            items = _react2.default.createElement(
             'div',
-            { className: 'popup-wrapper' },
-            _react2.default.createElement('div', { className: 'mask' }),
+            { className: 'efficiency-card-form' },
             _react2.default.createElement(
-                'div',
-                { className: 'content-wrapper' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'efficiency-card-form' },
-                    _react2.default.createElement('span', { className: 'icon close', onClick: function onClick() {
-                            return props.onCloseButtonClick();
-                        } }),
-                    _react2.default.createElement(
-                        'p',
-                        null,
-                        data.get('title')
-                    ),
-                    _react2.default.createElement(_RatingControl2.default, { cssClass: 'time', value: data.get('efficiencyRate'),
-                        onValueChanged: function onValueChanged(val) {
-                            return props.onPropertyRateChange(data.get('id'), 'efficiency', val);
-                        } }),
-                    _react2.default.createElement(_RatingControl2.default, { cssClass: 'perfomance', value: data.get('timeCostRate'),
-                        onValueChanged: function onValueChanged(val) {
-                            return props.onPropertyRateChange(data.get('id'), 'timeCost', val);
-                        } })
-                )
-            )
+                'p',
+                null,
+                data.get('title')
+            ),
+            _react2.default.createElement(_RatingControl2.default, { cssClass: 'time', value: data.get('efficiencyRate'),
+                onValueChanged: function onValueChanged(val) {
+                    return props.onPropertyRateChange(data.get('id'), 'efficiency', val);
+                } }),
+            _react2.default.createElement(_RatingControl2.default, { cssClass: 'perfomance', value: data.get('timeCostRate'),
+                onValueChanged: function onValueChanged(val) {
+                    return props.onPropertyRateChange(data.get('id'), 'timeCost', val);
+                } })
         );
+
+        return _react2.default.createElement(_FullScreenPopup2.default, { items: items, onCloseButtonClick: props.onFormClose });
     }
 });
 
@@ -14219,6 +14228,10 @@ var _CardForm = __webpack_require__(123);
 
 var _CardForm2 = _interopRequireDefault(_CardForm);
 
+var _CardsList = __webpack_require__(295);
+
+var _CardsList2 = _interopRequireDefault(_CardsList);
+
 var _efficiency = __webpack_require__(69);
 
 var actionCreators = _interopRequireWildcard(_efficiency);
@@ -14233,22 +14246,43 @@ var Efficiency = _react2.default.createClass({
     render: function render() {
         var _this = this;
 
-        var cards = this.props.cards.map(function (c, i) {
-            return _react2.default.createElement(_SmallCard2.default, { data: c, setOpenedCardId: _this.props.setOpenedCardId, key: i });
+        var cards = this.props.cards,
+            cardItems = cards.map(function (c, i) {
+            return _react2.default.createElement(_SmallCard2.default, { data: c, setOpenedCardId: _this.props.setOpenedCardId, key: c.get('id') });
         }),
-            openedCard = this.props.cards.find(function (c) {
+            openedCard = cards.find(function (c) {
             return c.get('id') === _this.props.openedCardId;
         }),
             gridLayoutItems = getGridLayoutItems();
+
         return _react2.default.createElement(
             'div',
             { className: 'efficiency-main-container' },
-            gridLayoutItems,
-            cards,
+            _react2.default.createElement(
+                'div',
+                { className: 'cards-container' },
+                gridLayoutItems,
+                cardItems
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'toolbar' },
+                _react2.default.createElement(
+                    'button',
+                    { onClick: function onClick() {
+                            return _this.props.setCardListVisibility(true);
+                        } },
+                    'Show Card List'
+                )
+            ),
             openedCard ? _react2.default.createElement(_CardForm2.default, { data: openedCard, onPropertyRateChange: this.props.setCardPropertyRate,
-                onCloseButtonClick: function onCloseButtonClick() {
+                onFormClose: function onFormClose() {
                     return _this.props.setOpenedCardId(null);
-                } }) : ''
+                } }) : '',
+            this.props.cardListVisibility ? _react2.default.createElement(_CardsList2.default, { cards: cards, onClose: function onClose() {
+                    return _this.props.setCardListVisibility(false);
+                },
+                onToggleCardVisibilityButtonClick: this.props.toggleCardVisibility }) : ''
         );
     }
 });
@@ -14269,7 +14303,8 @@ function getGridLayoutItems() {
 function mapStateToProps(state) {
     return {
         cards: state ? state.get('cards') : [],
-        openedCardId: state ? state.get('openedCardId') : null
+        openedCardId: state ? state.get('openedCardId') : null,
+        cardListVisibility: state ? state.get('cardListVisibility') : false
     };
 }
 
@@ -14351,8 +14386,8 @@ exports.default = _react2.default.createClass({
 
         return _react2.default.createElement(
             'div',
-            { style: getPositionStyles(averageEfficiencyRate, averageTimeCostRate), className: 'card',
-                onClick: function onClick() {
+            { style: getPositionStyles(averageEfficiencyRate, averageTimeCostRate),
+                className: "card " + (data.get('isHidden') ? 'hidden' : ''), onClick: function onClick() {
                     return props.setOpenedCardId(data.get('id'), true);
                 } },
             _react2.default.createElement(
@@ -14400,7 +14435,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function () {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : (0, _immutable.Map)();
-    var action = arguments[1];
+    var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
     switch (action.type) {
         case 'SET_STATE':
@@ -14409,8 +14444,12 @@ exports.default = function () {
             return randomizeRates(state, action.entry);
         case 'SET_OPENED_CARD':
             return setOpenedCardId(state, action.cardId);
+        case 'SET_CARD_LIST_VISIBILITY':
+            return setCardListVisibility(state, action.isVisible);
         case 'SET_CARD_PROPERTY_RATE':
             return setCardRateProperty(state, action.cardId, action.propertyName, action.val);
+        case 'TOGGLE_CARD_VISIBILITY':
+            return toggleCardVisibility(state, action.cardId);
     }
 };
 
@@ -14442,8 +14481,19 @@ function setCardProperty(state, cardId, propertyName, val) {
     return state;
 };
 
+function toggleCardVisibility(state, cardId) {
+    var isHidden = state.get('cards').find(function (c) {
+        return c.get('id') === cardId;
+    }).get('isHidden');
+    return setCardProperty(state, cardId, 'isHidden', !isHidden);
+};
+
 function setOpenedCardId(state, cardId) {
     return state.set('openedCardId', cardId);
+};
+
+function setCardListVisibility(state, isVisible) {
+    return state.set('cardListVisibility', isVisible);
 };
 
 function setCardRateProperty(state, cardId, propertyName, val) {
@@ -38415,6 +38465,100 @@ module.exports = __webpack_amd_options__;
 
 module.exports = __webpack_require__(122);
 
+
+/***/ }),
+/* 294 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(16);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _react2.default.createClass({
+    displayName: "FullScreenPopup",
+
+    render: function render() {
+        var props = this.props;
+        return _react2.default.createElement(
+            "div",
+            { className: "popup-wrapper" },
+            _react2.default.createElement("div", { className: "mask" }),
+            _react2.default.createElement(
+                "div",
+                { className: "content-wrapper" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "content" },
+                    _react2.default.createElement("span", { className: "icon close", onClick: function onClick() {
+                            return props.onCloseButtonClick();
+                        } }),
+                    props.items
+                )
+            )
+        );
+    }
+});
+
+/***/ }),
+/* 295 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(16);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _FullScreenPopup = __webpack_require__(294);
+
+var _FullScreenPopup2 = _interopRequireDefault(_FullScreenPopup);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _react2.default.createClass({
+    displayName: 'CardsList',
+
+    render: function render() {
+        var props = this.props,
+            cards = props.cards,
+            cardItems = cards.map(function (c, i) {
+            return _react2.default.createElement(
+                'div',
+                { className: 'item', key: c.get('id') },
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    c.get('title')
+                ),
+                _react2.default.createElement('span', { className: "icon " + (c.get('isHidden') ? 'hidden' : 'visible'),
+                    onClick: function onClick() {
+                        return props.onToggleCardVisibilityButtonClick(c.get('id'));
+                    } })
+            );
+        }),
+            cardsList = _react2.default.createElement(
+            'div',
+            { className: 'efficiency-cards-list' },
+            cardItems
+        );
+
+        return _react2.default.createElement(_FullScreenPopup2.default, { items: cardsList, onCloseButtonClick: props.onClose });
+    }
+});
 
 /***/ })
 /******/ ]);

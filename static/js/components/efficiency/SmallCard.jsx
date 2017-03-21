@@ -8,8 +8,8 @@ export default React.createClass({
             averageEfficiencyRate = utils.getListAverage(data.get('efficiencyRates')),
             averageTimeCostRate = utils.getListAverage(data.get('timeCostRates'));
 
-        return <div style={getPositionStyles(averageEfficiencyRate, averageTimeCostRate)} className="card"
-                    onClick={() => props.setOpenedCardId(data.get('id'), true)}>
+        return <div style={getPositionStyles(averageEfficiencyRate, averageTimeCostRate)}
+                    className={"card " + (data.get('isHidden') ? 'hidden' : '')} onClick={() => props.setOpenedCardId(data.get('id'), true)}>
             <p>{data.get('title')}</p>
 
             <div className="param-block">

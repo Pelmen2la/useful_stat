@@ -46,6 +46,11 @@ select:focus,
 textarea:focus{
     outline: 0;
 }
+
+button {
+    background: none;
+    border: none;
+}
 /* /Reset CSS */
 
 
@@ -72,16 +77,38 @@ span.icon.close {
     background-image: url('/resources/images/icons/svg/close.svg');
 }
 
+span.icon.list {
+    background-image: url('/resources/images/icons/svg/list.svg');
+}
+
+span.icon.visible {
+    background-image: url('/resources/images/icons/svg/visible.svg');
+}
+
+span.icon.hidden {
+    background-image: url('/resources/images/icons/svg/hidden.svg');
+}
+
 .efficiency-main-container {
     position: relative;
     box-sizing: border-box;
     border: 4px solid black;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
     height: 100%;
     background-color: white;
 }
 
-.efficiency-main-container .grid-layout-item {
+.efficiency-main-container .cards-container {
+    height: 95%;
+    position: relative;
+}
+
+.efficiency-main-container .toolbar {
+    border-top: 2px solid black;
+    height: 5%;
+}
+
+.efficiency-main-container .cards-container .grid-layout-item {
     width: 20%;
     height: 20%;
     border: 1px dashed black;
@@ -89,7 +116,7 @@ span.icon.close {
     z-index: 0;
 }
 
-.efficiency-main-container .card {
+.efficiency-main-container .cards-container .card {
     position: absolute;
     width: 20%;
     max-height: 5.6em;
@@ -102,7 +129,11 @@ span.icon.close {
     z-index: 1;
 }
 
-.efficiency-main-container .card p {
+.efficiency-main-container .cards-container .card.hidden {
+    display: none;
+}
+
+.efficiency-main-container .cards-container .card p {
     line-height: 1.2em;
     height: 3.6em;
     word-break: break-all;
@@ -112,20 +143,26 @@ span.icon.close {
     -webkit-box-orient: vertical;
 }
 
-.efficiency-main-container .card .param-block {
+.efficiency-main-container .cards-container .card .param-block {
     padding-top: 0.5em;
     width: 50%;
     display: inline-block;
 }
 
-.efficiency-main-container .card .param-block .icon {
+.efficiency-main-container .cards-container .card .param-block .icon {
     width: 1em;
     height: 1em;
     margin-right: 5px;
 }
 
+.efficiency-main-container .toolbar button {
+    height: 100%;
+    border-right: 3px solid black;
+}
+
 .popup-wrapper {
     position: fixed;
+    top: 0;
     display: table;
     width: 100%;
     height: 100%;
@@ -147,13 +184,10 @@ span.icon.close {
     vertical-align: middle;
 }
 
-.popup-wrapper .content-wrapper > div {
+.popup-wrapper .content-wrapper .content {
     width: 90%;
     margin: 0 auto;
     position: relative;
-}
-
-.efficiency-card-form {
     font-size: 60px;
     max-height: 90%;
     border: 5px solid #14A3E9;
@@ -162,7 +196,7 @@ span.icon.close {
     background: white;
 }
 
-.efficiency-card-form span.icon.close {
+.popup-wrapper .content-wrapper .content span.icon.close {
     position: absolute;
     right: 0.1em;
     top: 0.1em;
@@ -177,8 +211,22 @@ span.icon.close {
     width: 1em;
     height: 1em;
     margin: 0.5em 0.5em 0.5em 0;
+    cursor: pointer;
 }
 
 .efficiency-card-form .rating-control span.icon.selected {
     opacity: 1;
+}
+
+.efficiency-cards-list .item {
+    padding-right: 1em;
+    margin: 0.5em 0;
+}
+
+.efficiency-cards-list .item span.icon {
+    height: 1em;
+    width: 1em;
+    vertical-align: bottom;
+    float: right;
+    margin-left: 1em;
 }
