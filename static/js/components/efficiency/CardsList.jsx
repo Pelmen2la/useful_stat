@@ -6,16 +6,17 @@ export default React.createClass({
         var props = this.props,
             cards = props.cards,
             cardItems = cards.map(function(c, i) {
-                return <div className="item" key={c.get('id')}>
-                <span>
-                    {c.get('title')}
-                </span>
+                let id = c.get('id');
+                return <div className="item" key={id}>
+                    <span>
+                        {c.get('title')}
+                    </span>
                     <span className={"icon " + (c.get('isHidden') ? 'hidden' : 'visible')}
-                        onClick={() => props.onToggleCardVisibilityButtonClick(c.get('id'))}></span>
+                        onClick={() => props.onToggleCardVisibilityButtonClick(id)}></span>
+                    <span className="icon form" onClick={() => props.onShowFormButtonClick(id)}></span>
                 </div>
-            }),
-            cardsList = <div className="efficiency-cards-list">{cardItems}</div>;
+            });
 
-        return <FullScreenPopup items={cardsList} onCloseButtonClick={props.onClose}></FullScreenPopup>
+        return <FullScreenPopup items={cardItems} bodyClass="efficiency-cards-list" onCloseButtonClick={props.onClose}></FullScreenPopup>
     }
 });

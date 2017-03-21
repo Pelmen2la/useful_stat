@@ -89,6 +89,10 @@ span.icon.hidden {
     background-image: url('/resources/images/icons/svg/hidden.svg');
 }
 
+span.icon.form {
+    background-image: url('/resources/images/icons/svg/form.svg');
+}
+
 .efficiency-main-container {
     position: relative;
     box-sizing: border-box;
@@ -126,7 +130,7 @@ span.icon.hidden {
     padding: 10px;
     background-color: white;
     cursor: pointer;
-    z-index: 1;
+    z-index: 10;
 }
 
 .efficiency-main-container .cards-container .card.hidden {
@@ -166,7 +170,7 @@ span.icon.hidden {
     display: table;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: 20;
 }
 
 .popup-wrapper .mask {

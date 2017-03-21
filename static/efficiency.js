@@ -14182,7 +14182,7 @@ exports.default = _react2.default.createClass({
             data = this.props.data,
             items = _react2.default.createElement(
             'div',
-            { className: 'efficiency-card-form' },
+            null,
             _react2.default.createElement(
                 'p',
                 null,
@@ -14198,7 +14198,7 @@ exports.default = _react2.default.createClass({
                 } })
         );
 
-        return _react2.default.createElement(_FullScreenPopup2.default, { items: items, onCloseButtonClick: props.onFormClose });
+        return _react2.default.createElement(_FullScreenPopup2.default, { items: items, bodyClass: 'efficiency-card-form', zIndex: '25', onCloseButtonClick: props.onFormClose });
     }
 });
 
@@ -14282,7 +14282,8 @@ var Efficiency = _react2.default.createClass({
             this.props.cardListVisibility ? _react2.default.createElement(_CardsList2.default, { cards: cards, onClose: function onClose() {
                     return _this.props.setCardListVisibility(false);
                 },
-                onToggleCardVisibilityButtonClick: this.props.toggleCardVisibility }) : ''
+                onToggleCardVisibilityButtonClick: this.props.toggleCardVisibility,
+                onShowFormButtonClick: this.props.setOpenedCardId }) : ''
         );
     }
 });
@@ -38490,14 +38491,14 @@ exports.default = _react2.default.createClass({
         var props = this.props;
         return _react2.default.createElement(
             "div",
-            { className: "popup-wrapper" },
+            { className: "popup-wrapper", style: { zIndex: props.zIndex || 20 } },
             _react2.default.createElement("div", { className: "mask" }),
             _react2.default.createElement(
                 "div",
                 { className: "content-wrapper" },
                 _react2.default.createElement(
                     "div",
-                    { className: "content" },
+                    { className: 'content ' + (props.bodyClass || '') },
                     _react2.default.createElement("span", { className: "icon close", onClick: function onClick() {
                             return props.onCloseButtonClick();
                         } }),
@@ -38536,9 +38537,10 @@ exports.default = _react2.default.createClass({
         var props = this.props,
             cards = props.cards,
             cardItems = cards.map(function (c, i) {
+            var id = c.get('id');
             return _react2.default.createElement(
                 'div',
-                { className: 'item', key: c.get('id') },
+                { className: 'item', key: id },
                 _react2.default.createElement(
                     'span',
                     null,
@@ -38546,17 +38548,15 @@ exports.default = _react2.default.createClass({
                 ),
                 _react2.default.createElement('span', { className: "icon " + (c.get('isHidden') ? 'hidden' : 'visible'),
                     onClick: function onClick() {
-                        return props.onToggleCardVisibilityButtonClick(c.get('id'));
+                        return props.onToggleCardVisibilityButtonClick(id);
+                    } }),
+                _react2.default.createElement('span', { className: 'icon form', onClick: function onClick() {
+                        return props.onShowFormButtonClick(id);
                     } })
             );
-        }),
-            cardsList = _react2.default.createElement(
-            'div',
-            { className: 'efficiency-cards-list' },
-            cardItems
-        );
+        });
 
-        return _react2.default.createElement(_FullScreenPopup2.default, { items: cardsList, onCloseButtonClick: props.onClose });
+        return _react2.default.createElement(_FullScreenPopup2.default, { items: cardItems, bodyClass: 'efficiency-cards-list', onCloseButtonClick: props.onClose });
     }
 });
 

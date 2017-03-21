@@ -27,7 +27,8 @@ const Efficiency = React.createClass({
                 onFormClose={() => this.props.setOpenedCardId(null)}></CardForm> : ''}
 
             {this.props.cardListVisibility ? <CardsList cards={cards} onClose={() => this.props.setCardListVisibility(false)}
-                onToggleCardVisibilityButtonClick={this.props.toggleCardVisibility}></CardsList> : ''}
+                onToggleCardVisibilityButtonClick={this.props.toggleCardVisibility}
+                onShowFormButtonClick={this.props.setOpenedCardId}></CardsList> : ''}
         </div>;
     }
 });
