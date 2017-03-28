@@ -12,9 +12,6 @@ const store = createStore(reducer);
 
 socket.on('connect', function() {
     socket.on('state', function(state) {
-        var oldState = store.getState(),
-            oldCards = oldState ? oldState.get('cards') : null;
-
         state.cards.forEach(function(c) {
             c.timeCostRate = utils.getGraphCardPropertyCash(c.id, 'timeCost');
             c.efficiencyRate = utils.getGraphCardPropertyCash(c.id, 'efficiency');
