@@ -21,7 +21,7 @@ socket.on('connect', function() {
         });
         store.dispatch(setState({
                 cards: state.cards,
-                graphId: state._id
+                graphId: state.id
             })
         );
     });

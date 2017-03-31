@@ -9,7 +9,7 @@ module.exports = function(app) {
         graph.save(function() {
             res.send({
                 success: true,
-                graphUrl: '/service/efficiency/' + graph._id
+                graphUrl: '/eff/' + graph.id
             });
         });
     });
@@ -19,12 +19,12 @@ module.exports = function(app) {
             socket.join(roomId);
         });
         socket.on('stateRequest', function(graphId) {
-            EfficientyGraph.findById(graphId, function(err, graphData) {
+            EfficientyGraph.findOne({id: graphId}, function(err, graphData) {
                 socket.emit('state', graphData.toObject());
             });
         });
         socket.on('setCardProperty', function(graphId, data) {
-            EfficientyGraph.findById(graphId, function(err, graphData) {
+            EfficientyGraph.findOne({id: graphId}, function(err, graphData) {
                 var card = graphData.get('cards').find((c) => c.get('id') === data.cardId),
                     rates = card.get(data.propertyName + 'Rates');
                 if(data.oldVal) {
@@ -43,14 +43,14 @@ module.exports = function(app) {
 function createNewGraph(cardTexsts) {
     var cards = cardTexsts.split(',').map(function(text) {
         return {
-            id: utils.getGuid(),
+            id: utils.getUid(),
             title: text,
             efficiencyRates: [1],
             timeCostRates: [1]
         }
     });
     return new EfficientyGraph({
-        id: utils.getGuid(),
+        id: utils.getUid(),
         date: new Date(),
         cards: cards
     });

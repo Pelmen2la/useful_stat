@@ -9,7 +9,7 @@ module.exports = function(app) {
         graph.save(function() {
             res.send({
                 success: true,
-                graphUrl: '/service/yesNo/' + graph._id
+                graphUrl: '/yns/' + graph.id
             });
         });
     });
@@ -19,12 +19,12 @@ module.exports = function(app) {
             socket.join(roomId);
         });
         socket.on('stateRequest', function(statId) {
-            YesNoStat.findById(statId, function(err, statData) {
+            YesNoStat.findOne({id: statId}, function(err, statData) {
                 socket.emit('state', statData.toObject());
             });
         });
         socket.on('voteCard', function(statId, data) {
-            YesNoStat.findById(statId, function(err, graphData) {
+            YesNoStat.findOne({id: statId}, function(err, graphData) {
                 var card = graphData.get('cards').find((c) => c.get('id') === data.cardId);
                 data.oldVote && card.set(data.oldVote + 'Count', card.get(data.oldVote + 'Count') - 1);
                 card.set(data.vote + 'Count', card.get(data.vote + 'Count') + 1);
@@ -39,14 +39,14 @@ module.exports = function(app) {
 function createNewStat(cardTexsts) {
     var cards = cardTexsts.split(',').map(function(text) {
         return {
-            id: utils.getGuid(),
+            id: utils.getUid(),
             title: text,
             yesCount: 0,
             noCount: 0
         }
     });
     return new YesNoStat({
-        id: utils.getGuid(),
+        id: utils.getUid(),
         date: new Date(),
         cards: cards
     });

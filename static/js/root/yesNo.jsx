@@ -20,7 +20,7 @@ socket.on('connect', function() {
         });
         store.dispatch(setState({
                 cards: state.cards,
-                statId: state._id
+                statId: state.id
             })
         );
     });

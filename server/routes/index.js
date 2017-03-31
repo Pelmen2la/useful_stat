@@ -2,6 +2,11 @@ var fs = require('fs'),
     path = require('path');
 
 module.exports = function(app) {
+    const scriptNamesMapping = {
+        eff: 'efficiency',
+        yns: 'yesNo'
+    };
+
     require('./efficiency')(app);
     require('./yesNo')(app);
 
@@ -9,9 +14,9 @@ module.exports = function(app) {
         res.sendFile('/static/html/index.html', {root: global.appRoot })
     });
 
-    app.get('/service/:name/:id', function(req, res) {
+    app.get('/:statname/:id', function(req, res) {
         fs.readFile(path.join(global.appRoot, '/static/html/reactPageTpl.html'), 'utf8', function(err, pageHtml) {
-            pageHtml = pageHtml.replace('{{scriptName}}', req.params.name);
+            pageHtml = pageHtml.replace('{{scriptName}}', scriptNamesMapping[req.params.statname]);
             res.send(pageHtml);
         });
     });
