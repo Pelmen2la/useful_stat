@@ -30,21 +30,21 @@ const Efficiency = React.createClass({
                 onToggleCardVisibilityButtonClick={this.props.toggleCardVisibility}
                 onShowFormButtonClick={this.props.setOpenedCardId}></CardsList> : ''}
         </div>;
-    }
-});
 
-function getGridLayoutItems() {
-    var items = [];
-    for(var i = 0; i < 5; i++) {
-        for(var j = 0; j < 5; j++) {
-            var xPos = i * 20 + '%',
-                yPos = j * 20 + '%',
-                key = i.toString() + j.toString();
-            items.push(<div style={{left: xPos, top: yPos}} className="grid-layout-item" key={key}></div>)
+        function getGridLayoutItems() {
+            var items = [];
+            for(var i = 0; i < 5; i++) {
+                for(var j = 0; j < 5; j++) {
+                    var xPos = i * 20 + '%',
+                        yPos = j * 20 + '%',
+                        key = i.toString() + j.toString();
+                    items.push(<div style={{left: xPos, top: yPos}} className="grid-layout-item" key={key}></div>)
+                }
+            }
+            return items;
         }
     }
-    return items;
-}
+});
 
 function mapStateToProps(state) {
     return {

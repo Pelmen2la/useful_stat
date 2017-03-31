@@ -18,22 +18,36 @@ function getArrayAverage(arr) {
     return sum / arr.length;
 };
 
-function getGraphVotedCash() {
-    return (ReactCookie.load('graphVotedCash') || {});
+function setItemProperty(state, itemsKey, itemId, propertyName, val, withCache) {
+    var items = state.get(itemsKey);
+    items = items.update(
+        items.findIndex((c) => c.get('id') === itemId),
+        function(c) {
+            c = c.set(propertyName, val);
+            return c;
+        }
+    );
+    state = state.set(itemsKey, items);
+    withCache && setItemPropertyCache(itemId, propertyName, val);
+    return state;
 };
 
-function getGraphCardCacheKey(cardId, propertyName) {
-    return cardId + '_' + propertyName;
+function getActionsCache() {
+    return (ReactCookie.load('actionsCache') || {});
 };
 
-function getGraphCardPropertyCash(cardId, propertyName) {
-    return getGraphVotedCash()[getGraphCardCacheKey(cardId, propertyName)];
+function getItemCacheKey(itemId, propertyName) {
+    return itemId + '_' + propertyName;
 };
 
-function setGraphCardPropertyCash(cardId, propertyName, val) {
-    var cache = getGraphVotedCash();
-    cache[getGraphCardCacheKey(cardId, propertyName)] = val;
-    ReactCookie.save('graphVotedCash', cache);
+function getItemPropertyCache(itemId, propertyName) {
+    return getActionsCache()[getItemCacheKey(itemId, propertyName)];
+};
+
+function setItemPropertyCache(itemId, propertyName, val) {
+    var cache = getActionsCache();
+    cache[getItemCacheKey(itemId, propertyName)] = val;
+    ReactCookie.save('actionsCache', cache);
 };
 
 export default {
@@ -41,6 +55,7 @@ export default {
     getRandomInt: getRandomInt,
     getListAverage: getListAverage,
     getArrayAverage: getArrayAverage,
-    setGraphCardPropertyCash: setGraphCardPropertyCash,
-    getGraphCardPropertyCash: getGraphCardPropertyCash
+    setItemProperty: setItemProperty,
+    setItemPropertyCache: setItemPropertyCache,
+    getItemPropertyCache: getItemPropertyCache
 };

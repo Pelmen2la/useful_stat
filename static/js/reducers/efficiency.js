@@ -6,22 +6,9 @@ function setState(state, newState) {
     return state.merge(newState);
 };
 
-function setCardProperty(state, cardId, propertyName, val) {
-    var cards = state.get('cards');
-    cards = cards.update(
-        cards.findIndex((c) => c.get('id') === cardId),
-        function(c) {
-            c = c.set(propertyName, val);
-            return c;
-        }
-    );
-    state = state.set('cards', cards);
-    return state;
-};
-
 function toggleCardVisibility(state, cardId) {
     var isHidden = state.get('cards').find((c) => c.get('id') === cardId).get('isHidden');
-    return setCardProperty(state, cardId, 'isHidden', !isHidden);
+    return utils.setItemProperty(state, 'cards', cardId, 'isHidden', !isHidden);
 };
 
 function setOpenedCardId(state, cardId) {
@@ -37,9 +24,9 @@ function setCardRateProperty(state, cardId, propertyName, val) {
         cardId: cardId,
         propertyName: propertyName,
         val: val,
-        oldVal: utils.getGraphCardPropertyCash(cardId, propertyName)
+        oldVal: utils.getItemPropertyCache(cardId, propertyName)
     });
-    utils.setGraphCardPropertyCash(cardId, propertyName, val);
+    utils.setItemProperty(state, 'cards', cardId, propertyName, val, true);
 
     return state;
 }

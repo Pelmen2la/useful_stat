@@ -26,8 +26,7 @@ module.exports = function(app) {
         socket.on('setCardProperty', function(graphId, data) {
             EfficientyGraph.findById(graphId, function(err, graphData) {
                 var card = graphData.get('cards').find((c) => c.get('id') === data.cardId),
-                    rates = card.get(data.propertyName + 'Rates'),
-                    votedCash = utils.parseCookie(socket.client.request.headers.cookie)['graphVotedCash'];
+                    rates = card.get(data.propertyName + 'Rates');
                 if(data.oldVal) {
                     var oldRate = rates.find((e) => e == data.oldVal);
                     rates.splice(rates.indexOf(oldRate), 1);

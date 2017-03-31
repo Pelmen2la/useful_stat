@@ -1,6 +1,6 @@
 import React from 'react';
 import RatingControl from './RatingControl.jsx';
-import FullScreenPopup from './../common/FullScreenPopup.jsx';
+import Popup from './../common/Popup.jsx';
 
 export default React.createClass({
     render: function() {
@@ -14,7 +14,7 @@ export default React.createClass({
                                onValueChanged={(val) => props.onPropertyRateChange(data.get('id'), 'timeCost', val)}/>
             </div>;
 
-        return <FullScreenPopup items={items} bodyClass="efficiency-card-form" zIndex="25" onCloseButtonClick={props.onFormClose}>
-        </FullScreenPopup>
+        return <Popup items={items} bodyClass="efficiency-card-form" zIndex="25" onCloseButtonClick={props.onFormClose}>
+        </Popup>
     }
 });

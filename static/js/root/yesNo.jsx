@@ -2,26 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
-import {EfficiencyContainer} from './../components/efficiency/Main.jsx'
-import reducer from './../reducers/efficiency.js';
-import {setState} from './../action_creators/efficiency.js';
+import {YesNoContainer} from './../components/yesNo/Main.jsx'
+import reducer from './../reducers/yesNo.js';
+import {setState} from './../action_creators/yesNo.js';
 import utils from './../utils/appUtils.js';
-import socket from './../socket/efficiency.js';
+import socket from './../socket/yesNo.js';
 
 import './../../css/common.css'
-import './../../css/efficiency.css'
+import './../../css/yesNo.css'
 
 const store = createStore(reducer);
 
 socket.on('connect', function() {
     socket.on('state', function(state) {
         state.cards.forEach(function(c) {
-            c.timeCostRate = utils.getItemPropertyCache(c.id, 'timeCost');
-            c.efficiencyRate = utils.getItemPropertyCache(c.id, 'efficiency');
+            c.vote = utils.getItemPropertyCache(c.id, 'vote');
         });
         store.dispatch(setState({
                 cards: state.cards,
-                graphId: state._id
+                statId: state._id
             })
         );
     });
@@ -29,6 +28,6 @@ socket.on('connect', function() {
 
 ReactDOM.render(
     <Provider store={store}>
-        <EfficiencyContainer/>
+        <YesNoContainer/>
     </Provider>,
     document.getElementById('Root'));

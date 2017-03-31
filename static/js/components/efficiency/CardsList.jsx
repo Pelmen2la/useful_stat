@@ -1,5 +1,5 @@
 import React from 'react';
-import FullScreenPopup from './../common/FullScreenPopup.jsx';
+import Popup from './../common/Popup.jsx';
 
 export default React.createClass({
     render: function() {
@@ -17,6 +17,6 @@ export default React.createClass({
                 </div>
             });
 
-        return <FullScreenPopup items={cardItems} bodyClass="efficiency-cards-list" onCloseButtonClick={props.onClose}></FullScreenPopup>
+        return <Popup items={cardItems} bodyClass="efficiency-cards-list" onCloseButtonClick={props.onClose}></Popup>
     }
 });

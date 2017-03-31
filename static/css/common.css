@@ -1,0 +1,150 @@
+/* Reset CSS */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+button:focus,
+input:focus,
+select:focus,
+textarea:focus{
+    outline: 0;
+}
+
+button {
+    background: none;
+    border: none;
+}
+/* /Reset CSS */
+
+html,
+body,
+div#Root {
+    height: 100%;
+}
+
+/* Icons */
+
+span.icon {
+    display: inline-block;
+    background-size: cover;
+    cursor: pointer;
+}
+
+span.icon.time {
+    background-image: url('/resources/images/icons/common/svg/time.svg');
+}
+
+span.icon.perfomance {
+    background-image: url('/resources/images/icons/common/svg/performance.svg');
+}
+
+span.icon.close {
+    background-image: url('/resources/images/icons/common/svg/close.svg');
+}
+
+span.icon.list {
+    background-image: url('/resources/images/icons/common/svg/list.svg');
+}
+
+span.icon.visible {
+    background-image: url('/resources/images/icons/common/svg/visible.svg');
+}
+
+span.icon.hidden {
+    background-image: url('/resources/images/icons/common/svg/hidden.svg');
+}
+
+span.icon.form {
+    background-image: url('/resources/images/icons/common/svg/form.svg');
+}
+
+/* Icons */
+
+
+/* Popup */
+
+.popup-wrapper {
+    position: fixed;
+    top: 0;
+    display: table;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+}
+
+.popup-wrapper .mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.5;
+    background-color: #CCCCCC;;
+}
+
+.popup-wrapper .content-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.popup-wrapper .content-wrapper .content {
+    margin: 0 auto;
+    position: relative;
+    font-size: 60px;
+    max-height: 90%;
+    width: 90%;
+    overflow-y: auto;
+    border: 5px solid #14A3E9;
+    padding: 0.5em 1.2em;
+    box-sizing: border-box;
+    background: white;
+}
+
+.popup-wrapper .content-wrapper .content span.icon.close {
+    position: absolute;
+    right: 0.1em;
+    top: 0.1em;
+    height: 1em;
+    width: 1em;
+    opacity: 0.8;
+    background-color: white;
+}
+
+/* Popup */

@@ -15,6 +15,7 @@
     "body-parser": "^1.17.1",
     "compression": "^1.6.2",
     "cookie": "^0.3.1",
+    "css-loader": "^0.28.0",
     "express": "^4.15.0",
     "immutable": "^3.8.1",
     "mongoose": "^4.8.6",
@@ -26,6 +27,7 @@
     "require-tree": "^1.1.1",
     "socket.io": "^1.7.3",
     "socket.io-client": "^1.7.3",
+    "style-loader": "^0.16.1",
     "webpack": "^2.2.1"
   },
   "devDependencies": {},
