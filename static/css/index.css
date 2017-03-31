@@ -9,10 +9,10 @@ dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
+figure, figcaption, footer, header,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
+	margin: 0;/**/
 	padding: 0;
 	border: 0;
 	font-size: 100%;
@@ -21,7 +21,7 @@ time, mark, audio, video {
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+footer, header, menu, nav, section {
 	display: block;
 }
 body {
@@ -45,19 +45,34 @@ select:focus,
 textarea:focus{
     outline: 0;
 }
+input, button {
+	font-size: inherit;
+	background: none;
+}
 /* /Reset CSS */
 
-.card-inputs-container input {
-    height: 1.2em;
-    font-size: 30px;
-    display: block;
-    width: 100%;
-    margin: 0.5em 0;
+
+body {
+	font-size: 60px;
+	padding: 2.5%;
+}
+
+body > div {
+	overflow: auto;
 }
 
 button {
-    font-size: 30px;
-    margin: 0.5em 0;
+	cursor: pointer;
+	color: white;
+	background: #14A3E9;
+	border: none;
+	padding: 0.2em;
+	margin-bottom: 0.5em;
+}
+
+button[disabled] {
+	cursor: auto;
+	opacity: 0.5;
 }
 
 .stat-types-container img {
@@ -65,4 +80,27 @@ button {
     float: left;
     width: 128px;
     margin: 10px;
+}
+
+.card-inputs-container .card-title-wrapper {
+	position: relative;
+}
+
+.card-inputs-container .card-title-wrapper input {
+    height: 1.2em;
+    display: block;
+    width: 100%;
+    margin: 0.5em 0;
+	box-sizing: border-box;
+}
+
+.card-inputs-container .card-title-wrapper:first-child img {
+	display: none;
+}
+
+.card-inputs-container .card-title-wrapper img {
+	position: absolute;
+	height: 1em;
+	top: 0.1em;
+	right: 0.1em;
 }

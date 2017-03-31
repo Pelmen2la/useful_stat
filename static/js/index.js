@@ -1,7 +1,8 @@
 (appModule = new function() {
     var me = this;
 
-    var SELECTED_IMAGE_POSTFIX = '_selected';
+    var SELECTED_IMAGE_POSTFIX = '_selected',
+        CARD_TITLE_WRAPPER_CSS_CLASS_SELECTOR = '.card-title-wrapper';
 
     function createPostRequest(url, data, callback) {
         var xhr = new XMLHttpRequest();
@@ -15,44 +16,52 @@
         xhr.send('data=' + JSON.stringify(data));
     };
 
+    function deepClone(node) {
+        var newNode = node.cloneNode();
+        ['onclick', 'onkeyup'].forEach(function(event) {
+            newNode[event] = node[event];
+        });
+        for(var child, i = 0; child = node.children[i]; i++) {
+            newNode.appendChild(deepClone(child));
+        }
+        return newNode;
+    }
+
     function getInputsContainer() {
         return document.getElementById('CardInputsContainer');
     };
-    
+
     function getInputsTexts() {
         var cardTexts = [];
-        getInputsContainer().querySelectorAll('input').forEach(function(i) {
+        getInputsContainer().querySelectorAll('.card-title-wrapper input').forEach(function(i) {
             i.value && cardTexts.push(i.value);
         });
         return cardTexts.join(',');
     };
 
     function ensureButtonsState() {
-        var deleteButton = document.getElementById('DeleteCardInputButton'),
-            inputsCount = getInputsContainer().childElementCount;
-        deleteButton[inputsCount < 2 ? 'setAttribute' : 'removeAttribute']('disabled', true);
-        ensureCreateButtonState();
+        window.clearTimeout(appModule.ensureButtonsStateTimeout);
+        appModule.ensureButtonsStateTimeout = window.setTimeout(ensureCreateButtonState, 300);
     };
 
     function ensureCreateButtonState() {
         document.getElementById('CreateGraphButton')[getInputsTexts().length == 0 ? 'setAttribute' : 'removeAttribute']('disabled', true);
     };
 
-    function onDeleteCardInputButtonClick(e) {
-        if(e.target.getAttribute('disabled')) {
-            return;
-        }
-        var container = getInputsContainer(),
-            inputs = container.childNodes,
-            inputToDelete = inputs[inputs.length - 1];
-        container.removeChild(inputToDelete);
+    function onRemoveCardTitleButtonClick(e) {
+        getInputsContainer().removeChild(e.target.parentNode);
+        ensureButtonsState();
+    };
+
+    function onCardTitleInputKeyUp(e) {
         ensureButtonsState();
     };
 
     function onAddCardInputButtonClick() {
-        var newInput = document.createElement('INPUT');
-        newInput.setAttribute('type', 'text');
-        document.getElementById('CardInputsContainer').appendChild(newInput);
+        var settingsNode = document.querySelector(CARD_TITLE_WRAPPER_CSS_CLASS_SELECTOR),
+            clone = deepClone(settingsNode);
+        clone.querySelector('input').value = '';
+        document.getElementById('CardInputsContainer').appendChild(clone);
         ensureButtonsState();
     };
 
@@ -94,10 +103,11 @@
         ensureButtonsState();
         ensureStatTypesNodesStatus();
 
-        document.getElementById('DeleteCardInputButton').addEventListener('click', onDeleteCardInputButtonClick);
-        document.getElementById('AddCardInputButton').addEventListener('click', onAddCardInputButtonClick);
-        document.getElementById('CreateGraphButton').addEventListener('click', onCreateGraphButtonClick);
-        document.getElementById('StastTypesContainer').addEventListener('click', onStatTypesContainerClick);
+        document.querySelector(CARD_TITLE_WRAPPER_CSS_CLASS_SELECTOR + ' img').onclick = onRemoveCardTitleButtonClick;
+        document.querySelector(CARD_TITLE_WRAPPER_CSS_CLASS_SELECTOR + ' input').onkeyup = onCardTitleInputKeyUp;
+        document.getElementById('AddCardInputButton').onclick = onAddCardInputButtonClick;
+        document.getElementById('CreateGraphButton').onclick = onCreateGraphButtonClick;
+        document.getElementById('StastTypesContainer').onclick = onStatTypesContainerClick;
     };
 }());
 

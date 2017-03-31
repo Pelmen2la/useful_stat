@@ -2,23 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Графики</title>
+    <title>Useful stat</title>
     <link rel="stylesheet" type="text/css" href="../css/index.css">
 </head>
 <body>
-    <h1>Создать новый график</h1>
     <div id="StastTypesContainer" class="stat-types-container">
         <img data-statType="efficiency" src="/resources/images/icons/stat_types/svg/efficiency.svg">
         <img data-statType="yesNo" src="/resources/images/icons/stat_types/svg/plus_minus.svg">
     </div>
 
     <div id="CardInputsContainer" class="card-inputs-container">
-        <input type="text" value="test">
+        <div class="card-title-wrapper">
+            <input type="text" >
+            <img src="/resources/images/icons/common/svg/remove.svg" />
+        </div>
     </div>
-    <button id="DeleteCardInputButton">Удалить карточку</button>
-    <button id="AddCardInputButton">Добавить карточку</button>
+    <button id="AddCardInputButton">Add card</button>
     <br>
-    <button id="CreateGraphButton">Создать график</button>
+    <button id="CreateGraphButton">Create stat</button>
     <br>
 
     <script src="/js/index.js"></script>

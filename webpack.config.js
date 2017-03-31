@@ -4,7 +4,8 @@ module.exports = {
     context: __dirname + '/static/',
     entry: {
         efficiency: './js/root/efficiency.jsx',
-        yesNo: './js/root/yesNo.jsx'
+        yesNo: './js/root/yesNo.jsx',
+        index: './js/index.js'
     },
     output: { path: __dirname + '/static/dist/js/', filename: '[name].js'},
     module: {
