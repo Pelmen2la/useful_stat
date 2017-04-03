@@ -1,5 +1,6 @@
 var fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    mongoose = require('mongoose');
 
 module.exports = function(app) {
     const scriptNamesMapping = {
@@ -7,11 +8,22 @@ module.exports = function(app) {
         yns: 'yesNo'
     };
 
+    const modelsMapping = {
+        efficiency: mongoose.model('efficientyGraph'),
+        yesNo: mongoose.model('yesNoStat')
+    };
+
     require('./efficiency')(app);
     require('./yesNo')(app);
 
     app.get('/', function(req, res) {
         res.sendFile('/static/html/index.html', {root: global.appRoot })
+    });
+
+    app.get('/is_id_free/:statname/:id', function(req, res) {
+        modelsMapping[req.params.statname].findOne({id: req.params.id}, function(err, data) {
+            res.send(!data);
+        });
     });
 
     app.get('/:statname/:id', function(req, res) {

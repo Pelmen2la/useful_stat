@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 module.exports = function(app) {
     app.post('/efficiency/create/', function(req, res) {
-        var graph = createNewGraph(req.body.data);
+        var graph = createNewGraph(JSON.parse(req.body.data));
         graph.save(function() {
             res.send({
                 success: true,
@@ -40,17 +40,17 @@ module.exports = function(app) {
     });
 };
 
-function createNewGraph(cardTexsts) {
-    var cards = cardTexsts.split(',').map(function(text) {
+function createNewGraph(data) {
+    var cards = data.cardsText.split(',').map(function(text) {
         return {
             id: utils.getUid(),
             title: text,
-            efficiencyRates: [1],
-            timeCostRates: [1]
+            efficiencyRates: [],
+            timeCostRates: []
         }
     });
     return new EfficientyGraph({
-        id: utils.getUid(),
+        id: data.id || utils.getUid(),
         date: new Date(),
         cards: cards
     });

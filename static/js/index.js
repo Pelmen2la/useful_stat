@@ -4,16 +4,16 @@
     var SELECTED_IMAGE_POSTFIX = '_selected',
         CARD_TITLE_WRAPPER_CSS_CLASS_SELECTOR = '.card-title-wrapper';
 
-    function createPostRequest(url, data, callback) {
+    function createRequest(url, method, data, callback) {
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.open(method, url, true);
+        data && xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function() {
             if(xhr.readyState == 4 && xhr.status == 200) {
                 callback(JSON.parse(xhr.responseText));
             }
         };
-        xhr.send('data=' + JSON.stringify(data));
+        xhr.send(data ? 'data=' + JSON.stringify(data) : null);
     };
 
     function deepClone(node) {
@@ -40,12 +40,16 @@
     };
 
     function ensureButtonsState() {
-        window.clearTimeout(appModule.ensureButtonsStateTimeout);
-        appModule.ensureButtonsStateTimeout = window.setTimeout(ensureCreateButtonState, 300);
+        window.clearTimeout(me.ensureButtonsStateTimeout);
+        me.ensureButtonsStateTimeout = window.setTimeout(ensureCreateButtonState, 300);
     };
 
     function ensureCreateButtonState() {
-        document.getElementById('CreateGraphButton')[getInputsTexts().length == 0 ? 'setAttribute' : 'removeAttribute']('disabled', true);
+        function setButtonDisabled(isDisabled) {
+            document.getElementById('CreateStatButton')[isDisabled ? 'setAttribute' : 'removeAttribute']('disabled', true);
+        }
+
+        setButtonDisabled((me.statId && me.statId.length >= 4 && !me.isIdFree) || getInputsTexts().length == 0);
     };
 
     function onRemoveCardTitleButtonClick(e) {
@@ -57,6 +61,25 @@
         ensureButtonsState();
     };
 
+    function onStatIdInputKeyUp(e) {
+        me.statId = e.target.value;
+        window.clearTimeout(me.checkIdTimeout);
+        setErrorLabelVisible('IdLength', me.statId && me.statId.length < 4);
+        if(me.statId && me.statId.length >= 4) {
+            me.checkIdTimeout = window.setTimeout(function() {
+                createRequest('/is_id_free/' + me.selectedStatType + '/' + me.statId, 'GET', null, function(resp) {
+                    me.isIdFree = resp;
+                    setErrorLabelVisible('IdNotFree', !me.isIdFree);
+                    ensureButtonsState();
+                });
+            }, 300);
+        } else {
+            me.isIdFree = true;
+            setErrorLabelVisible('IdNotFree', false);
+            ensureButtonsState();
+        }
+    };
+
     function onAddCardInputButtonClick() {
         var settingsNode = document.querySelector(CARD_TITLE_WRAPPER_CSS_CLASS_SELECTOR),
             clone = deepClone(settingsNode);
@@ -65,8 +88,12 @@
         ensureButtonsState();
     };
 
-    function onCreateGraphButtonClick() {
-        createPostRequest('/' + me.selectedStatType + '/create/', getInputsTexts(), function(resp) {
+    function onCreateStatButtonClick() {
+        var data = {
+            cardsText: getInputsTexts(),
+            id: me.statId
+        };
+        createRequest('/' + me.selectedStatType + '/create/', 'POST', data, function(resp) {
             window.open(resp.graphUrl, '_self');
         });
     };
@@ -79,6 +106,11 @@
         }
         me.selectedStatType = statType;
         ensureStatTypesNodesStatus();
+    };
+    
+    function setErrorLabelVisible(errorName, isVisible) {
+        var label = document.getElementById(errorName + 'ErrorLabel');
+        label.innerHTML = isVisible ? label.dataset.message : '';
     };
 
     function ensureStatTypesNodesStatus() {
@@ -105,8 +137,9 @@
 
         document.querySelector(CARD_TITLE_WRAPPER_CSS_CLASS_SELECTOR + ' img').onclick = onRemoveCardTitleButtonClick;
         document.querySelector(CARD_TITLE_WRAPPER_CSS_CLASS_SELECTOR + ' input').onkeyup = onCardTitleInputKeyUp;
+        document.getElementById('StatIdInput').onkeyup = onStatIdInputKeyUp;
         document.getElementById('AddCardInputButton').onclick = onAddCardInputButtonClick;
-        document.getElementById('CreateGraphButton').onclick = onCreateGraphButtonClick;
+        document.getElementById('CreateStatButton').onclick = onCreateStatButtonClick;
         document.getElementById('StastTypesContainer').onclick = onStatTypesContainerClick;
     };
 }());

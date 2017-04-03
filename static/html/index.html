@@ -13,14 +13,17 @@
 
     <div id="CardInputsContainer" class="card-inputs-container">
         <div class="card-title-wrapper">
-            <input type="text" >
+            <input placeholder="Card title" type="text">
             <img src="/resources/images/icons/common/svg/remove.svg" />
         </div>
     </div>
     <button id="AddCardInputButton">Add card</button>
     <br>
-    <button id="CreateGraphButton">Create stat</button>
+    <input id="StatIdInput" placeholder="Room id (optional)" type="text">
+    <span id="IdLengthErrorLabel" class="error-label" data-message="Id must be at least 4 characters long"></span>
+    <span id="IdNotFreeErrorLabel" class="error-label" data-message="Id already exists"></span>
     <br>
+    <button id="CreateStatButton">Create stat</button>
 
     <script src="/js/index.js"></script>
 </body>

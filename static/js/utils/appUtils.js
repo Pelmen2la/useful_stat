@@ -15,7 +15,7 @@ function getListAverage(list) {
 function getArrayAverage(arr) {
     var sum = 0;
     arr.forEach((e) => sum += e);
-    return sum / arr.length;
+    return arr.length ? sum / arr.length : 0;
 };
 
 function setItemProperty(state, itemsKey, itemId, propertyName, val, withCache) {

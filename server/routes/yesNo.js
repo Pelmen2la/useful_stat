@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 module.exports = function(app) {
     app.post('/yesno/create/', function(req, res) {
-        var graph = createNewStat(req.body.data);
+        var graph = createNewStat(JSON.parse(req.body.data));
         graph.save(function() {
             res.send({
                 success: true,
@@ -36,8 +36,8 @@ module.exports = function(app) {
     });
 };
 
-function createNewStat(cardTexsts) {
-    var cards = cardTexsts.split(',').map(function(text) {
+function createNewStat(data) {
+    var cards = data.cardsText.split(',').map(function(text) {
         return {
             id: utils.getUid(),
             title: text,
@@ -46,7 +46,7 @@ function createNewStat(cardTexsts) {
         }
     });
     return new YesNoStat({
-        id: utils.getUid(),
+        id: data.id || utils.getUid(),
         date: new Date(),
         cards: cards
     });

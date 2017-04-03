@@ -67,7 +67,12 @@ button {
 	background: #14A3E9;
 	border: none;
 	padding: 0.2em;
-	margin-bottom: 0.5em;
+	margin: 0.5em 0;
+}
+
+input {
+	width: 100%;
+	text-indent: 0.166666em;
 }
 
 button[disabled] {
@@ -89,7 +94,6 @@ button[disabled] {
 .card-inputs-container .card-title-wrapper input {
     height: 1.2em;
     display: block;
-    width: 100%;
     margin: 0.5em 0;
 	box-sizing: border-box;
 }
@@ -103,4 +107,10 @@ button[disabled] {
 	height: 1em;
 	top: 0.1em;
 	right: 0.1em;
+}
+
+.error-label {
+    display: inline-block;
+    font-size: 0.5em;
+    color: red;
 }
