@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:8085');
+const socket = io(window.location.origin + ':8085');
 
 let splittedPath = window.location.pathname.split('/');
 
