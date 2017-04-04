@@ -16,7 +16,7 @@ const store = createStore(reducer);
 socket.on('connect', function() {
     socket.on('state', function(state) {
         state.cards.forEach(function(c) {
-            c.userDotsCount = utils.getItemPropertyCache(c.id, 'userDotsCount');
+            c.userDotsCount = utils.getItemPropertyCache(c.id, 'userDotsCount') || 0;
         });
         store.dispatch(setState({
                 cards: state.cards,

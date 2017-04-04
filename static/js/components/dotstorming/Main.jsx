@@ -10,8 +10,7 @@ const Dotstorming = React.createClass({
         var props = this.props,
             cards = props.cards,
             userDotsLimitReached = cards.reduce(function(res, card) {
-                var userDotsCount = utils.getItemPropertyCache(card.get('id'), 'userDotsCount');
-                return res + (userDotsCount || 0)
+                return res + card.get('userDotsCount');
             }, 0) >= 10,
             cardItems = cards.map((c) => <ListItem hasAddDotButton={!userDotsLimitReached} onAddDotButtonClick={props.addDot}
                                                    onRemoveDotButtonClick={props.removeDot} key={c.get('id')} data={c} />);

@@ -7,11 +7,10 @@ export default React.createClass({
             data = this.props.data,
             id = data.get('id'),
             dots = [],
-            dostCount = data.get('dotsCount'),
-            userDotsCount = utils.getItemPropertyCache(data.get('id'), 'userDotsCount');
+            dostCount = data.get('dotsCount');
 
         for(var i = 0; i < dostCount; i++) {
-            var isUserDot = dostCount - i <= userDotsCount;
+            var isUserDot = dostCount - i <= data.get('userDotsCount');
             dots.push(<li key={i} className={isUserDot ? 'user-dot' : ''}
                           onClick={isUserDot ? () => props.onRemoveDotButtonClick(id) : null}></li>);
         }
