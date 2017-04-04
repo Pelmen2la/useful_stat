@@ -41,7 +41,7 @@ module.exports = function(app) {
 };
 
 function createNewGraph(data) {
-    var cards = data.cardsText.split(',').map(function(text) {
+    var cards = data.cardsText.split('{sep}').map(function(text) {
         return {
             id: utils.getUid(),
             title: text,

@@ -36,7 +36,7 @@
         getInputsContainer().querySelectorAll('.card-title-wrapper input').forEach(function(i) {
             i.value && cardTexts.push(i.value);
         });
-        return cardTexts.join(',');
+        return cardTexts.join('{sep}');
     };
 
     function ensureButtonsState() {
