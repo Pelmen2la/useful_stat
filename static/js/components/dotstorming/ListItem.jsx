@@ -15,7 +15,7 @@ export default React.createClass({
             dots.push(<li key={i} className={isUserDot ? 'user-dot' : ''}
                           onClick={isUserDot ? () => props.onRemoveDotButtonClick(id) : null}></li>);
         }
-        dots.push(<li key={dostCount} className={'add-dot'} onClick={() => props.onAddDotButtonClick(id)}></li>);
+        props.hasAddDotButton && dots.push(<li key={dostCount} className={'add-dot'} onClick={() => props.onAddDotButtonClick(id)}></li>);
 
         return <div className="dotstorming-card">
             <p>{data.get('title')}</p>
