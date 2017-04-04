@@ -3,6 +3,7 @@ var webpack = require('webpack');
 module.exports = {
     context: __dirname + '/static/',
     entry: {
+        dotstorming: './js/root/dotstorming.jsx',
         efficiency: './js/root/efficiency.jsx',
         yesNo: './js/root/yesNo.jsx',
         index: './js/index.js'

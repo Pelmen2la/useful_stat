@@ -4,15 +4,18 @@ var fs = require('fs'),
 
 module.exports = function(app) {
     const scriptNamesMapping = {
+        dst: 'dotstorming',
         eff: 'efficiency',
         yns: 'yesNo'
     };
 
-    const modelsMapping = {
-        efficiency: mongoose.model('efficientyGraph'),
-        yesNo: mongoose.model('yesNoStat')
+    const modelNamesMapping = {
+        dotstorming: 'dotstormingStat',
+        efficiency: 'efficientyGraph',
+        yesNo: 'yesNoStat'
     };
 
+    require('./dotstorming')(app);
     require('./efficiency')(app);
     require('./yesNo')(app);
 
@@ -21,7 +24,7 @@ module.exports = function(app) {
     });
 
     app.get('/is_id_free/:statname/:id', function(req, res) {
-        modelsMapping[req.params.statname].findOne({id: req.params.id}, function(err, data) {
+        mongoose.model(modelNamesMapping[req.params.statname]).findOne({id: req.params.id}, function(err, data) {
             res.send(!data);
         });
     });

@@ -1,14 +1,3 @@
-import io from 'socket.io-client';
+import utils from './../utils/appUtils.js';
 
-const socket = io(window.location.origin + ':8086');
-
-let splittedPath = window.location.pathname.split('/');
-
-socket.roomId = splittedPath[splittedPath.length - 1];
-
-socket.on('connect', function() {
-    socket.emit('joinRoom', socket.roomId);
-    socket.emit('stateRequest', socket.roomId);
-});
-
-export default socket;
+export default utils.getCurrentRoomSocket(8086);

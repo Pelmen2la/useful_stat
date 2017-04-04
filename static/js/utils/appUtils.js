@@ -1,4 +1,5 @@
 import ReactCookie from 'react-cookie';
+import io from 'socket.io-client';
 
 function getRandomInt(min, max) {
     return Math.floor(getRandomFloat(min, max));
@@ -50,6 +51,20 @@ function setItemPropertyCache(itemId, propertyName, val) {
     ReactCookie.save('actionsCache', cache);
 };
 
+function getCurrentRoomSocket(port) {
+    const socket = io(window.location.origin + ':' + port);
+    let splittedPath = window.location.pathname.split('/');
+
+    socket.roomId = splittedPath[splittedPath.length - 1];
+
+    socket.on('connect', function() {
+        socket.emit('joinRoom', socket.roomId);
+        socket.emit('stateRequest', socket.roomId);
+    });
+
+    return socket;
+};
+
 export default {
     getRandomFloat: getRandomFloat,
     getRandomInt: getRandomInt,
@@ -57,5 +72,6 @@ export default {
     getArrayAverage: getArrayAverage,
     setItemProperty: setItemProperty,
     setItemPropertyCache: setItemPropertyCache,
-    getItemPropertyCache: getItemPropertyCache
+    getItemPropertyCache: getItemPropertyCache,
+    getCurrentRoomSocket: getCurrentRoomSocket
 };

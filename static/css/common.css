@@ -51,6 +51,10 @@ button {
     background: none;
     border: none;
 }
+
+ul {
+    list-style: none;
+}
 /* /Reset CSS */
 
 html,
