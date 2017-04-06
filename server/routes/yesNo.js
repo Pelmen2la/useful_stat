@@ -1,15 +1,17 @@
 var mongoose = require('mongoose'),
     YesNoStat = mongoose.model('yesNoStat'),
     utils = require('../Utils'),
+    dataHelper = require('../DataHelper'),
     io = require('socket.io').listen(8086);
 
 module.exports = function(app) {
     app.post('/yesno/create/', function(req, res) {
-        var graph = createNewStat(JSON.parse(req.body.data));
-        graph.save(function() {
+        var stat = dataHelper.createCardsStatEntry(YesNoStat, JSON.parse(req.body.data),
+            { yesCount: 0, noCount: 0 });
+        stat.save(function() {
             res.send({
                 success: true,
-                graphUrl: '/yns/' + graph.id
+                graphUrl: '/yns/' + stat.id
             });
         });
     });
@@ -33,21 +35,5 @@ module.exports = function(app) {
                 });
             });
         });
-    });
-};
-
-function createNewStat(data) {
-    var cards = data.cardsText.split('{sep}').map(function(text) {
-        return {
-            id: utils.getUid(),
-            title: text,
-            yesCount: 0,
-            noCount: 0
-        }
-    });
-    return new YesNoStat({
-        id: data.id || utils.getUid(),
-        date: new Date(),
-        cards: cards
     });
 };

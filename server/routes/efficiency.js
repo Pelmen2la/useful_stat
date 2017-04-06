@@ -1,11 +1,13 @@
 var mongoose = require('mongoose'),
     EfficientyGraph = mongoose.model('efficientyGraph'),
     utils = require('../Utils'),
+    dataHelper = require('../DataHelper'),
     io = require('socket.io').listen(8085);
 
 module.exports = function(app) {
     app.post('/efficiency/create/', function(req, res) {
-        var graph = createNewGraph(JSON.parse(req.body.data));
+        var graph = dataHelper.createCardsStatEntry(EfficientyGraph, JSON.parse(req.body.data),
+            { efficiencyRates: [], timeCostRates: [] });
         graph.save(function() {
             res.send({
                 success: true,
@@ -37,21 +39,5 @@ module.exports = function(app) {
                 });
             });
         });
-    });
-};
-
-function createNewGraph(data) {
-    var cards = data.cardsText.split('{sep}').map(function(text) {
-        return {
-            id: utils.getUid(),
-            title: text,
-            efficiencyRates: [],
-            timeCostRates: []
-        }
-    });
-    return new EfficientyGraph({
-        id: data.id || utils.getUid(),
-        date: new Date(),
-        cards: cards
     });
 };

@@ -1,11 +1,12 @@
 var mongoose = require('mongoose'),
     Dotstorming = mongoose.model('dotstormingStat'),
     utils = require('../Utils'),
+    dataHelper = require('../DataHelper'),
     io = require('socket.io').listen(8087);
 
 module.exports = function(app) {
     app.post('/dotstorming/create/', function(req, res) {
-        var graph = createNewStat(JSON.parse(req.body.data));
+        var graph = dataHelper.createCardsStatEntry(Dotstorming, JSON.parse(req.body.data), { dotsCount: 0 });
         graph.save(function() {
             res.send({
                 success: true,
@@ -32,20 +33,5 @@ module.exports = function(app) {
                 });
             });
         });
-    });
-};
-
-function createNewStat(data) {
-    var cards = data.cardsText.split('{sep}').map(function(text) {
-        return {
-            id: utils.getUid(),
-            title: text,
-            dotsCount: 0
-        }
-    });
-    return new Dotstorming({
-        id: data.id || utils.getUid(),
-        date: new Date(),
-        cards: cards
     });
 };
