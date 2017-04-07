@@ -1,0 +1,27 @@
+.fistvote-entry {
+    border: 1px solid #14A3E9;
+    font-size: 60px;
+    padding: 0.125em;
+    margin: 0.083333em;
+    position: relative;
+}
+
+.fistvote-entry p {
+    padding-right: 1.25em;
+}
+
+.fistvote-entry .average-vote {
+    height: 1em;
+    position: absolute;
+    right: 0.125em;;
+    top: 0.125em;
+}
+
+.fistvote-entry .vote-buttons-container {
+    margin-top: 0.5em;
+}
+
+.fistvote-entry .vote-buttons-container img {
+    height: 1em;
+    cursor: pointer;
+}

@@ -31,7 +31,7 @@ module.exports = function(app) {
                     rates = card.get(data.propertyName + 'Rates');
                 if(data.oldVal) {
                     var oldRate = rates.find((e) => e == data.oldVal);
-                    rates.splice(rates.indexOf(oldRate), 1);
+                    rates.indexOf(oldRate) != -1 && rates.splice(rates.indexOf(oldRate), 1);
                 }
                 rates.push(data.val);
                 graphData.save(function(err, graphData) {

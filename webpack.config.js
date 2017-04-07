@@ -5,6 +5,7 @@ module.exports = {
     entry: {
         dotstorming: './js/root/dotstorming.jsx',
         efficiency: './js/root/efficiency.jsx',
+        fistVote: './js/root/fistVote.jsx',
         yesNo: './js/root/yesNo.jsx',
         index: './js/index.js'
     },
