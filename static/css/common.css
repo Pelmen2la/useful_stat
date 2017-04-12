@@ -152,3 +152,27 @@ span.icon.form {
 }
 
 /* Popup */
+
+/* Progress bar */
+
+.progress-bar {
+    border: 1px solid black;
+    height: 1em;
+    text-align: center;
+    position: relative;
+}
+
+.progress-bar .progress {
+    background: #14A3E9;
+    height: 100%;
+    position: absolute;
+    opacity: 0.5;
+}
+
+.progress-bar .text {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+/* /Progress bar */

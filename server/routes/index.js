@@ -7,6 +7,7 @@ module.exports = function(app) {
         dst: 'dotstorming',
         eff: 'efficiency',
         fvs: 'fistVote',
+        siv: 'simpleVote',
         yns: 'yesNo'
     };
 
@@ -14,13 +15,15 @@ module.exports = function(app) {
         dotstorming: 'dotstormingStat',
         efficiency: 'efficientyGraph',
         fistVote: 'fistVoteStat',
+        simpleVote: 'simpleVoteStat',
         yesNo: 'yesNoStat'
     };
 
     require('./dotstorming')(app);
     require('./efficiency')(app);
-    require('./yesNo')(app);
     require('./fistVote')(app);
+    require('./simpleVote')(app);
+    require('./yesNo')(app);
 
     app.get('/', function(req, res) {
         res.sendFile('/static/html/index.html', {root: global.appRoot })
