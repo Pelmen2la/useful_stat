@@ -1,0 +1,29 @@
+@import './common.scss';
+
+.fistvote-entry {
+    border: 1px solid $mainBlueColor;
+    font-size: 60px;
+    padding: 0.125em;
+    margin: 0.083333em;
+    position: relative;
+
+    p {
+        padding-right: 1.25em;
+    }
+
+    .average-vote {
+        height: 1em;
+        position: absolute;
+        right: 0.125em;;
+        top: 0.125em;
+    }
+
+    .vote-buttons-container {
+        margin-top: 0.5em;
+        
+        img {
+            height: 1em;
+            cursor: pointer;
+        }
+    }
+}

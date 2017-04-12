@@ -8,8 +8,7 @@ import {setState} from './../action_creators/efficiency.js';
 import utils from './../utils/appUtils.js';
 import socket from './../socket/efficiency.js';
 
-import './../../css/common.css'
-import './../../css/efficiency.css'
+import './../../scss/efficiency.scss'
 
 const store = createStore(reducer);
 

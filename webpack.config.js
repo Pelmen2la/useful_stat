@@ -22,8 +22,25 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
-                loader: 'style-loader!css-loader'
+                test: /\.(scss|css)$/,
+                use: [
+                    {
+                        loader: 'style-loader',
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                            importLoaders: 1
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: 'inline'
+                        }
+                    }
+                ]
             }
         ]
     }

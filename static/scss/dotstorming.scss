@@ -1,0 +1,34 @@
+@import './common.scss';
+
+.dotstorming-card {
+    border: 2px solid $mainBlueColor;
+    border-radius: 0.125em;
+    padding: 0.25em;
+    margin: 0.25em;
+    font-size: 40px;
+    overflow: auto;
+
+    ul.dots-container li {
+        height: 1em;
+        width: 1em;
+        border: 1px solid black;
+        border-radius: 0.5em;
+        background: black;
+        margin: 0.25em;
+        float: left;
+
+        &.user-dot {
+            border-color: $mainBlueColor;
+            background: $mainBlueColor;
+            cursor: pointer;
+        }
+        &.add-dot {
+            border-color: $mainBlueColor;
+            background: none;
+            cursor: pointer;
+        }
+    }
+}
+
+
+

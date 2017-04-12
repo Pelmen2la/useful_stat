@@ -8,8 +8,7 @@ import {setState} from './../action_creators/yesNo.js';
 import utils from './../utils/appUtils.js';
 import socket from './../socket/yesNo.js';
 
-import './../../css/common.css'
-import './../../css/yesNo.css'
+import './../../scss/yesNo.scss'
 
 const store = createStore(reducer);
 

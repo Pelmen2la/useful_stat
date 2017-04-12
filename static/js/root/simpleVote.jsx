@@ -8,8 +8,7 @@ import {setState} from './../action_creators/simpleVote.js';
 import utils from './../utils/appUtils.js';
 import socket from './../socket/simpleVote.js';
 
-import './../../css/common.css'
-import './../../css/simpleVote.css'
+import './../../scss/simpleVote.scss'
 
 const store = createStore(reducer);
 

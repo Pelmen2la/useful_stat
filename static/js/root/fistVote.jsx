@@ -8,8 +8,7 @@ import {setState} from './../action_creators/fistVote.js';
 import utils from './../utils/appUtils.js';
 import socket from './../socket/fistVote.js';
 
-import './../../css/common.css'
-import './../../css/fistVote.css'
+import './../../scss/fistVote.scss'
 
 const store = createStore(reducer);
 

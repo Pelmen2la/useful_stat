@@ -1,0 +1,25 @@
+@import './common.scss';
+
+.simplevote-entry {
+    border: 1px solid #14A3E9;
+    font-size: 60px;
+    padding: 0.125em;
+    margin: 0.083333em;
+    position: relative;
+
+    p {
+        padding-right: 1.25em;
+    }
+
+    img.vote-button {
+        height: 1em;
+        position: absolute;
+        right: 0.125em;;
+        top: 0.125em;
+        cursor: pointer;
+    }
+
+    .progress-bar {
+        margin-top: 1em;
+    }
+}

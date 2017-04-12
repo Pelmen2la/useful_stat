@@ -1,0 +1,49 @@
+@import './common.scss';
+
+.yesno-entry {
+    border: 1px solid #14A3E9;
+    font-size: 60px;
+    padding: 0.125em;
+    margin: 0.083333em;
+
+    span.title {
+        display: inline-block;
+        width: 70%;
+        cursor: pointer;
+    }
+
+    .vote-buttons {
+        display: inline-block;
+        float: right;
+        height: 1em;
+    }
+}
+
+.yesno-card-form .vote-buttons {
+    height: 1em;
+    display: inline-block;
+    margin-top: 1em;
+}
+
+.vote-buttons {
+    img,
+    span.number {
+        display: inline-block;
+        height: 100%;
+        margin: 0 0.083333em;
+    }
+
+    img {
+        cursor: pointer;
+    }
+
+    span {
+        &.plus {
+            color: #07B007;
+        }
+
+        &.minus {
+            color: #D80027;
+        }
+    }
+}
