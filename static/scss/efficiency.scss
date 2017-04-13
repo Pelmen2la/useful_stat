@@ -87,18 +87,30 @@
     max-height: 2em;
     overflow: hidden;
 
-    .item span {
+    span {
         &.text {
             display: inline-block;
             width: 65%;
         }
 
         &.icon {
-            height: 1em;
-            width: 1em;
             vertical-align: bottom;
             float: right;
             margin-right: 1em;
         }
+    }
+}
+
+span.icon {
+    &.time {
+        background-image: svg-load('./../resources/images/icons/efficiency/svg/time.svg');
+    }
+
+    &.perfomance {
+        background-image: svg-load('./../resources/images/icons/efficiency/svg/performance.svg');
+    }
+
+    &.form {
+        background-image: svg-load('./../resources/images/icons/efficiency/svg/form.svg');
     }
 }

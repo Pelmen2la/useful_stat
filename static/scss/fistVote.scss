@@ -13,6 +13,7 @@
 
     .average-vote {
         height: 1em;
+        width: 1em;
         position: absolute;
         right: 0.125em;;
         top: 0.125em;
@@ -20,10 +21,13 @@
 
     .vote-buttons-container {
         margin-top: 0.5em;
-        
-        img {
-            height: 1em;
-            cursor: pointer;
+    }
+
+    span.icon {
+        @each $color, $i in ED1B24, F57E22, FEC009, F3E705, B4D433, 51B74A {
+            &.fingers$(i) {
+                background-image: svg-load('./../resources/images/icons/fist_vote/svg/fingers$(i).svg', fill=#$color);
+            }
         }
     }
 }

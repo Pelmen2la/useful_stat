@@ -46,4 +46,14 @@
             color: #D80027;
         }
     }
+
+    span.icon {
+        &.finger-up {
+            background-image: svg-load('./../resources/images/icons/yes_no/svg/finger_up.svg', fill=#07B007);
+        }
+
+        &.finger-down {
+            background-image: svg-load('./../resources/images/icons/yes_no/svg/finger_down.svg', fill=#D80027);
+        }
+    }
 }

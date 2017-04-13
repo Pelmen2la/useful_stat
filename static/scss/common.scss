@@ -70,39 +70,30 @@ div#Root {
     height: 100%;
 }
 
+.disabled,
+.not-active {
+    opacity: 0.4;
+}
+
 /* Icons */
 
 span.icon {
     display: inline-block;
     background-size: cover;
     cursor: pointer;
-
-    &.time {
-        background-image: url('/resources/images/icons/common/svg/time.svg');
-    }
-
-    &.perfomance {
-        background-image: url('/resources/images/icons/common/svg/performance.svg');
-    }
+    height: 1em;
+    width: 1em;
 
     &.close {
-        background-image: url('/resources/images/icons/common/svg/close.svg');
-    }
-
-    &.list {
-        background-image: url('/resources/images/icons/common/svg/list.svg');
+        background-image: svg-load('./../resources/images/icons/common/svg/close.svg');
     }
 
     &.visible {
-        background-image: url('/resources/images/icons/common/svg/visible.svg');
+        background-image: svg-load('./../resources/images/icons/common/svg/visible.svg');
     }
 
     &.hidden {
-        background-image: url('/resources/images/icons/common/svg/hidden.svg');
-    }
-
-    &.form {
-        background-image: url('/resources/images/icons/common/svg/form.svg');
+        background-image: svg-load('./../resources/images/icons/common/svg/hidden.svg');
     }
 }
 

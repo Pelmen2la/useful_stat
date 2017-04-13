@@ -4,14 +4,14 @@ export default React.createClass({
     render: function() {
         var props = this.props;
         return <span className="vote-buttons">
-            <img src={getImageSrc("finger_down", props.vote === 'no')} onClick={() => props.onVoteButtonClick('no')}/>
+            <span className={getIconClassName("finger-down", props.vote === 'no')} onClick={() => props.onVoteButtonClick('no')}/>
             <span className="number minus">{props.noCount}</span>
-            <img src={getImageSrc("finger_up", props.vote === 'yes')}  onClick={() => props.onVoteButtonClick('yes')}/>
+            <span className={getIconClassName("finger-up", props.vote === 'yes')}  onClick={() => props.onVoteButtonClick('yes')}/>
             <span className="number plus">{props.yesCount}</span>
         </span>
 
-        function getImageSrc(imageName, isActive) {
-            return "/resources/images/icons/common/svg/" + imageName + (isActive ? '' : '_not_active') + ".svg";
+        function getIconClassName(imageName, isActive) {
+            return "icon " + imageName + (isActive ? '' : ' not-active');
         }
     }
 });

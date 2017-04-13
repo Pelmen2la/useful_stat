@@ -11,19 +11,19 @@ export default React.createClass({
             voteButtons = [];
 
         for(let i = 0; i <= 5; i++) {
-            voteButtons.push(<img key={i} src={getVoteButtonImageSrc(i, i === vote)}
+            voteButtons.push(<span key={i} className={getVoteButtonClassName(i, i === vote)}
                                   onClick={() => props.onVoteButtonClick(id, i)}/>);
         }
         return <div className="fistvote-entry">
             <p className="title">{data.get('title')}</p>
-            {vote !== undefined&& <img className="average-vote" src={getVoteButtonImageSrc(averageVote, true)}/>}
+            {vote !== undefined && <span className={"average-vote " + getVoteButtonClassName(averageVote, true)}/>}
             <div className="vote-buttons-container">
                 {voteButtons}
             </div>
         </div>
 
-        function getVoteButtonImageSrc(index, isActive) {
-            return "/resources/images/icons/common/svg/fingers" + index + (isActive ? '' : '_not_active') + ".svg";
+        function getVoteButtonClassName(index, isActive) {
+            return "icon fingers" + index + (isActive ? '' : ' not-active');
         }
     }
 });
