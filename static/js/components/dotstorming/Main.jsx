@@ -20,7 +20,7 @@ const Dotstorming = React.createClass({
             {cardItems}
             <div className="remaing-dots-count">
                 {props.maxDotsCount - userDotsCount}
-                <span className="dot"/>
+                <span className="dot user-dot"/>
             </div>
         </div>;
     }

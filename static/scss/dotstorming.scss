@@ -22,15 +22,17 @@ body {
     border: 1px solid black;
     border-radius: 0.5em;
     margin: 0.25em;
-    border-color: $mainBlueColor;
-    background: $mainBlueColor;
+    background: black;
 
+    &.add-dot,
     &.user-dot {
+        background: $mainBlueColor;
+        border-color: $mainBlueColor;
         cursor: pointer;
     }
+
     &.add-dot {
         background: none;
-        cursor: pointer;
     }
 }
 
