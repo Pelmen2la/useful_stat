@@ -1,7 +1,7 @@
 var utils = require('./Utils');
 
 function createCardsStatEntry(model, data, cardDefaults) {
-    var cards = data.cardsText.split('{sep}').map(function(text) {
+    var cards = data.cardsText.map(function(text) {
         var card = {
             id: utils.getUid(),
             title: text

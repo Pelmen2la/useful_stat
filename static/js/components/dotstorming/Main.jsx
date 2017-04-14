@@ -9,14 +9,19 @@ const Dotstorming = React.createClass({
 
         var props = this.props,
             cards = props.cards,
-            userDotsLimitReached = cards.reduce(function(res, card) {
+             userDotsCount = cards.reduce(function(res, card) {
                 return res + card.get('userDotsCount');
-            }, 0) >= 10,
+            }, 0),
+            userDotsLimitReached = userDotsCount >= props.maxDotsCount,
             cardItems = cards.map((c) => <ListItem hasAddDotButton={!userDotsLimitReached} onAddDotButtonClick={props.addDot}
                                                    onRemoveDotButtonClick={props.removeDot} key={c.get('id')} data={c} />);
 
         return <div>
             {cardItems}
+            <div className="remaing-dots-count">
+                {props.maxDotsCount - userDotsCount}
+                <span className="dot"/>
+            </div>
         </div>;
     }
 });
@@ -24,7 +29,8 @@ const Dotstorming = React.createClass({
 function mapStateToProps(state) {
     return {
         cards: state ? state.get('cards') : [],
-        userDotsLimitReached: state && state.get('userDotsLimitReached')
+        userDotsLimitReached: state && state.get('userDotsLimitReached'),
+        maxDotsCount: state && state.get('maxDotsCount')
     };
 }
 

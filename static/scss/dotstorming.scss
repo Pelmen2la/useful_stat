@@ -1,32 +1,50 @@
 @import './common.scss';
 
+body {
+    font-size: 40px;
+}
+
 .dotstorming-card {
     border: 2px solid $mainBlueColor;
     border-radius: 0.125em;
     padding: 0.25em;
     margin: 0.25em;
-    font-size: 40px;
     overflow: auto;
 
-    ul.dots-container li {
-        height: 1em;
-        width: 1em;
-        border: 1px solid black;
-        border-radius: 0.5em;
-        background: black;
-        margin: 0.25em;
+    .dot {
         float: left;
+    }
+}
 
-        &.user-dot {
-            border-color: $mainBlueColor;
-            background: $mainBlueColor;
-            cursor: pointer;
-        }
-        &.add-dot {
-            border-color: $mainBlueColor;
-            background: none;
-            cursor: pointer;
-        }
+.dot {
+    height: 1em;
+    width: 1em;
+    border: 1px solid black;
+    border-radius: 0.5em;
+    margin: 0.25em;
+    border-color: $mainBlueColor;
+    background: $mainBlueColor;
+
+    &.user-dot {
+        cursor: pointer;
+    }
+    &.add-dot {
+        background: none;
+        cursor: pointer;
+    }
+}
+
+.remaing-dots-count {
+    overflow: auto;
+    position: fixed;
+    padding: 0.1em;
+    bottom: 1em;
+    right: 1em;
+
+    .dot {
+        display: inline-block;
+        vertical-align: middle;
+        margin-top: -0.05em;
     }
 }
 

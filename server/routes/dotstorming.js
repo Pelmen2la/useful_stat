@@ -6,11 +6,13 @@ var mongoose = require('mongoose'),
 
 module.exports = function(app) {
     app.post('/dotstorming/create/', function(req, res) {
-        var graph = dataHelper.createCardsStatEntry(Dotstorming, JSON.parse(req.body.data), { dotsCount: 0 });
-        graph.save(function() {
+        var data = JSON.parse(req.body.data),
+            stat = dataHelper.createCardsStatEntry(Dotstorming, data, { dotsCount: 0 });
+        stat.set('maxDotsCount', data.maxDotsCount || 10);
+        stat.save(function() {
             res.send({
                 success: true,
-                graphUrl: '/dst/' + graph.id
+                graphUrl: '/dst/' + stat.id
             });
         });
     });

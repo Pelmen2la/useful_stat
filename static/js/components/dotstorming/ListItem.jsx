@@ -11,14 +11,14 @@ export default React.createClass({
 
         for(var i = 0; i < dostCount; i++) {
             var isUserDot = dostCount - i <= data.get('userDotsCount');
-            dots.push(<li key={i} className={isUserDot ? 'user-dot' : ''}
+            dots.push(<li key={i} className={'dot ' + (isUserDot ? 'user-dot' : '')}
                           onClick={isUserDot ? () => props.onRemoveDotButtonClick(id) : null}></li>);
         }
-        props.hasAddDotButton && dots.push(<li key={dostCount} className={'add-dot'} onClick={() => props.onAddDotButtonClick(id)}></li>);
+        props.hasAddDotButton && dots.push(<li key={dostCount} className={'dot add-dot'} onClick={() => props.onAddDotButtonClick(id)}></li>);
 
         return <div className="dotstorming-card">
             <p>{data.get('title')}</p>
-            <ul className="dots-container">
+            <ul>
                 {dots}
             </ul>
         </div>

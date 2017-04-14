@@ -12,7 +12,7 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;/**/
+	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
@@ -91,7 +91,7 @@ button[disabled] {
 	position: relative;
 }
 
-.card-inputs-container .card-title-wrapper input {
+input {
     height: 1.2em;
     display: block;
     margin: 0.5em 0;

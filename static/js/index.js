@@ -27,16 +27,22 @@
         return newNode;
     }
 
-    function getInputsContainer() {
+    function getCardTextInputsContainer() {
         return document.getElementById('CardInputsContainer');
     };
 
-    function getInputsTexts() {
+    function getCardTextInputsTexts() {
         var cardTexts = [];
-        getInputsContainer().querySelectorAll('.card-title-wrapper input').forEach(function(i) {
+        getCardTextInputsContainer().querySelectorAll('.card-title-wrapper input').forEach(function(i) {
             i.value && cardTexts.push(i.value);
         });
-        return cardTexts.join('{sep}');
+        return cardTexts;
+    };
+
+    function ensureStatSettingsFieldVisibility() {
+        document.querySelectorAll('[data-statTypeDepended]').forEach(function(i) {
+            i.style.display = i.dataset.stattypedepended === me.selectedStatType ? '' : 'none';
+        });
     };
 
     function ensureButtonsState() {
@@ -49,11 +55,11 @@
             document.getElementById('CreateStatButton')[isDisabled ? 'setAttribute' : 'removeAttribute']('disabled', true);
         }
 
-        setButtonDisabled((me.statId && me.statId.length >= 4 && !me.isIdFree) || getInputsTexts().length == 0);
+        setButtonDisabled((me.statId && me.statId.length >= 4 && !me.isIdFree) || getCardTextInputsTexts().length == 0);
     };
 
     function onRemoveCardTitleButtonClick(e) {
-        getInputsContainer().removeChild(e.target.parentNode);
+        getCardTextInputsContainer().removeChild(e.target.parentNode);
         ensureButtonsState();
     };
 
@@ -90,9 +96,12 @@
 
     function onCreateStatButtonClick() {
         var data = {
-            cardsText: getInputsTexts(),
+            cardsText: getCardTextInputsTexts(),
             id: me.statId
         };
+        document.querySelectorAll('[data-statTypeDepended=' + me.selectedStatType + ']').forEach(function(i) {
+            i.value && (data[i.name] = i.value);
+        });
         createRequest('/' + me.selectedStatType + '/create/', 'POST', data, function(resp) {
             window.open(resp.graphUrl, '_self');
         });
@@ -105,6 +114,7 @@
             return;
         }
         me.selectedStatType = statType;
+        ensureStatSettingsFieldVisibility();
         ensureStatTypesNodesStatus();
     };
     
@@ -134,6 +144,7 @@
     me.init = function() {
         ensureButtonsState();
         ensureStatTypesNodesStatus();
+        ensureStatSettingsFieldVisibility();
 
         document.querySelector(CARD_TITLE_WRAPPER_CSS_CLASS_SELECTOR + ' img').onclick = onRemoveCardTitleButtonClick;
         document.querySelector(CARD_TITLE_WRAPPER_CSS_CLASS_SELECTOR + ' input').onkeyup = onCardTitleInputKeyUp;

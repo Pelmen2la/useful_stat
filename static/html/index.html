@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Useful stat</title>
-    <link rel="stylesheet" type="text/css" href="../css/index.css" defer>
 </head>
 <body>
     <div id="StastTypesContainer" class="stat-types-container">
@@ -14,7 +13,7 @@
         <img data-statType="simpleVote" src="/resources/images/icons/stat_types/svg/simple_vote.svg">
     </div>
 
-    <div id="CardInputsContainer" class="card-inputs-container">
+    <div id="CardInputsContainer" class="card-inputs-container" propertyName="cardTexts">
         <div class="card-title-wrapper">
             <input placeholder="Card title" type="text">
             <img src="/resources/images/icons/common/svg/remove.svg" />
@@ -22,12 +21,14 @@
     </div>
     <button id="AddCardInputButton">Add card</button>
     <br>
+    <input data-statTypeDepended="dotstorming"  name="maxDotsCount" placeholder="Dots count (default 10)" type="text">
     <input id="StatIdInput" placeholder="Room id (optional)" type="text">
     <span id="IdLengthErrorLabel" class="error-label" data-message="Id must be at least 4 characters long"></span>
     <span id="IdNotFreeErrorLabel" class="error-label" data-message="Id already exists"></span>
     <br>
     <button id="CreateStatButton">Create stat</button>
 
+    <link rel="stylesheet" type="text/css" href="../css/index.css">
     <script src="/js/index.js"></script>
 </body>
 </html>
