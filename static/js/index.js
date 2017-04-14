@@ -25,7 +25,15 @@
             newNode.appendChild(deepClone(child));
         }
         return newNode;
-    }
+    };
+
+    function addClassToElement(el, className) {
+        el.className += ' ' + className;
+    };
+
+    function removeClassFromElement(el, className) {
+        el.className = el.className.replace(' ' + className, '');
+    };
 
     function getCardTextInputsContainer() {
         return document.getElementById('CardInputsContainer');
@@ -46,6 +54,9 @@
     };
 
     function ensureButtonsState() {
+        var cont = getCardTextInputsContainer();
+        (cont.children.length > 1 ? addClassToElement : removeClassFromElement)(cont, 'has-remove-buttons');
+
         window.clearTimeout(me.ensureButtonsStateTimeout);
         me.ensureButtonsStateTimeout = window.setTimeout(ensureCreateButtonState, 300);
     };

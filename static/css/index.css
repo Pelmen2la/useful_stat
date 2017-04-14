@@ -98,12 +98,14 @@ input {
 	box-sizing: border-box;
 }
 
-.card-inputs-container .card-title-wrapper:first-child img {
+.card-inputs-container .card-title-wrapper img {
 	display: none;
 }
 
-.card-inputs-container .card-title-wrapper img {
+.card-inputs-container.has-remove-buttons .card-title-wrapper img {
 	position: absolute;
+	display: block;
+	cursor: pointer;
 	height: 1em;
 	top: 0.1em;
 	right: 0.1em;
