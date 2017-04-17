@@ -1,0 +1,10 @@
+{
+    "CARD_TITLE_INPUT_PLACEHOLDER": "Card title",
+    "ADD_CARD_BUTTON_TEXT": "Add card",
+    "STAT_ID_INPUT_PLACEHOLDER": "Room id (optional)",
+    "ID_LENGTH_ERROR": "Id must be at least 4 characters long",
+    "ID_NOT_FREE_ERROR": "Id already exists",
+    "CREATE_STAT_BUTTON_TEXT": "Create stat",
+
+    "MAX_DOTS_COUNT_INPUT_PLACEHOLDER": "Dots count (default 10)"
+}

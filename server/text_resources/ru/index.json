@@ -1,0 +1,10 @@
+{
+    "CARD_TITLE_INPUT_PLACEHOLDER": "Имя карточки",
+    "ADD_CARD_BUTTON_TEXT": "Добавить карточку",
+    "STAT_ID_INPUT_PLACEHOLDER": "ID опроса (опционально)",
+    "ID_LENGTH_ERROR": "Длина ID должна быть не меньше 4 символов",
+    "ID_NOT_FREE_ERROR": "Данный ID уже занят",
+    "CREATE_STAT_BUTTON_TEXT": "Создать опрос",
+
+    "MAX_DOTS_COUNT_INPUT_PLACEHOLDER": "Количество точек (по-умолчанию 10)"
+}

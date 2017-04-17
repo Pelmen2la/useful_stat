@@ -27,6 +27,15 @@
         return newNode;
     };
 
+    function getPageLanguage() {
+        return document.cookie.indexOf('lang=') > -1 ? document.cookie.match(/lang=\S+/)[0].split('=')[1] : 'en';
+    };
+
+    function setPageLanguage(lang) {
+        document.cookie = 'lang=' + lang + '; path=/; expires=' + (new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)).toUTCString();
+        window.location.reload();
+    };
+
     function addClassToElement(el, className) {
         el.className += ' ' + className;
     };
@@ -45,6 +54,12 @@
             i.value && cardTexts.push(i.value);
         });
         return cardTexts;
+    };
+
+    function ensureLanguageSelectorButtonsState() {
+        document.querySelectorAll('[data-language]').forEach(function(i) {
+            i.style.opacity = i.dataset.language === getPageLanguage() ? '1' : '0.5';
+        });
     };
 
     function ensureStatSettingsFieldVisibility() {
@@ -118,6 +133,14 @@
         });
     };
 
+    function onLanguageSelectorContainerClick(e) {
+        var target = e.target,
+            language = e.target.dataset.language;
+        if(language && language !== getPageLanguage()) {
+            setPageLanguage(language);
+        }
+    };
+
     function onStatTypesContainerClick(e) {
         var target = e.target,
             statType = target.dataset.stattype;
@@ -154,6 +177,7 @@
 
     me.init = function() {
         ensureButtonsState();
+        ensureLanguageSelectorButtonsState();
         ensureStatTypesNodesStatus();
         ensureStatSettingsFieldVisibility();
 
@@ -162,6 +186,7 @@
         document.getElementById('StatIdInput').onkeyup = onStatIdInputKeyUp;
         document.getElementById('AddCardInputButton').onclick = onAddCardInputButtonClick;
         document.getElementById('CreateStatButton').onclick = onCreateStatButtonClick;
+        document.getElementById('LanguagesSelectorContainer').onclick = onLanguageSelectorContainerClick;
         document.getElementById('StastTypesContainer').onclick = onStatTypesContainerClick;
     };
 }());

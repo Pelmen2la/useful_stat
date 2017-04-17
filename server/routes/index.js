@@ -1,6 +1,7 @@
 var fs = require('fs'),
     path = require('path'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    cookie = require('cookie');
 
 module.exports = function(app) {
     const scriptNamesMapping = {
@@ -26,7 +27,18 @@ module.exports = function(app) {
     require('./yesNo')(app);
 
     app.get('/', function(req, res) {
-        res.sendFile('/static/html/index.html', {root: global.appRoot })
+        fs.readFile(path.join(global.appRoot, '/static/html/index.html'), 'utf8', function(err, indexPageHtml) {
+            var lang = cookie.parse(req.headers.cookie).lang || 'en';
+            fs.readFile(path.join(global.appRoot, '/server/text_resources/' + lang +'/index.json'), 'utf8', function(err, textData) {
+                textData = JSON.parse(textData);
+                for(key in textData) {
+                    if(textData.hasOwnProperty(key)) {
+                        indexPageHtml = indexPageHtml.replace(new RegExp('{{' + key + '}}', 'g'), textData[key]);
+                    }
+                }
+                res.send(indexPageHtml);
+            });
+        });
     });
 
     app.get('/is_id_free/:statname/:id', function(req, res) {

@@ -80,6 +80,13 @@ button[disabled] {
 	opacity: 0.5;
 }
 
+.language-selector-container img {
+	height: 0.7em;
+	margin-left: 0.5em;
+	float: right;
+	cursor: pointer;
+}
+
 .stat-types-container img {
     cursor: pointer;
     float: left;
