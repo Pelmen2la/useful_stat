@@ -28,7 +28,7 @@ module.exports = function(app) {
 
     app.get('/', function(req, res) {
         fs.readFile(path.join(global.appRoot, '/static/html/index.html'), 'utf8', function(err, indexPageHtml) {
-            var lang = cookie.parse(req.headers.cookie).lang || 'en';
+            var lang = cookie.parse(req.headers.cookie || '').lang || 'en';
             fs.readFile(path.join(global.appRoot, '/server/text_resources/' + lang +'/index.json'), 'utf8', function(err, textData) {
                 textData = JSON.parse(textData);
                 for(key in textData) {
