@@ -1,17 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../action_creators/fistVote.js';
-import ListItem from './ListItem.jsx'
+import utils from './../../utils/appUtils.js';
+import VoteButtons from './VoteButtons.jsx';
+import SimpleDataList from '../common/SimpleDataList.jsx';
+import FistIcon from './FistIcon.jsx';
 
 const FistVote = React.createClass({
     render: function() {
         var props = this.props,
             cards = props.cards,
-            cardItems = cards.map((c) => <ListItem onVoteButtonClick={props.cardVote} key={c.get('id')} data={c} />);
+            itemRightControlsGetter = (c) => c.get('vote') ?
+                <FistIcon isActive={true} index={Math.round(utils.getListAverage(c.get('votes')))}/> : '',
+            itemBottomControlsGetter = (c) => <VoteButtons onVoteButtonClick={props.cardVote} data={c}/>;
 
-        return <div>
-            {cardItems}
-        </div>;
+        return <SimpleDataList items={cards} itemRightControlsGetter={itemRightControlsGetter}
+            itemBottomControlsGetter={itemBottomControlsGetter}/>;
     }
 });
 

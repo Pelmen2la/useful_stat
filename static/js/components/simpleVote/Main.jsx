@@ -1,20 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../action_creators/simpleVote.js';
-import ListItem from './ListItem.jsx'
 import utils from './../../utils/appUtils.js';
+import SimpleDataList from '../common/SimpleDataList.jsx'
+import ProgressBar from './../common/ProgressBar.jsx';
 
 const SimpleVote = React.createClass({
     render: function() {
         var props = this.props,
             cards = props.cards,
             totalVotesCount = cards.reduce((prev, current) => { return prev + current.get('voteCount') }, 0),
-            cardItems = cards.map((c) => <ListItem onVoteButtonClick={props.voteCard} key={c.get('id')} data={c}
-                totalCount={totalVotesCount} />);
+            itemRightControlsGetter = (c) => <span className={'vote-button icon' + (c.get('voted') ? ' check' : '')}
+                                                   onClick={() => !c.get('voted') && props.voteCard(c.get('id')) }/>,
+            itemBottomControlsGetter = (c) => <ProgressBar text={ c.get('voteCount') + ' / ' + totalVotesCount }
+                                                           progress={ c.get('voteCount') / totalVotesCount }/>;
 
-        return <div>
-            {cardItems}
-        </div>;
+        return <SimpleDataList items={cards} itemRightControlsGetter={itemRightControlsGetter}
+                               itemBottomControlsGetter={itemBottomControlsGetter}/>;
     }
 });
 

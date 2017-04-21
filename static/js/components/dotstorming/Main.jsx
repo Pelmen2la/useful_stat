@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../action_creators/dotstorming.js';
-import ListItem from './ListItem.jsx'
+import SimpleDataList from '../common/SimpleDataList.jsx';
+import Dots from './Dots.jsx';
 import utils from './../../utils/appUtils.js';
 
 const Dotstorming = React.createClass({
@@ -13,11 +14,11 @@ const Dotstorming = React.createClass({
                 return res + card.get('userDotsCount');
             }, 0),
             userDotsLimitReached = userDotsCount >= props.maxDotsCount,
-            cardItems = cards.map((c) => <ListItem hasAddDotButton={!userDotsLimitReached} onAddDotButtonClick={props.addDot}
-                                                   onRemoveDotButtonClick={props.removeDot} key={c.get('id')} data={c} />);
+            itemBottomControlsGetter = (c) => <Dots hasAddDotButton={!userDotsLimitReached} onAddDotButtonClick={props.addDot}
+                                                   onRemoveDotButtonClick={props.removeDot} key={c.get('id')} data={c}/>;
 
         return <div>
-            {cardItems}
+            <SimpleDataList items={cards} itemBottomControlsGetter={itemBottomControlsGetter}/>
             <div className="remaing-dots-count">
                 {props.maxDotsCount - userDotsCount}
                 <span className="dot user-dot"/>

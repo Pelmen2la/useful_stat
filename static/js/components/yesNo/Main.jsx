@@ -1,22 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../action_creators/yesNo.js';
-import ListItem from './ListItem.jsx'
-import CardPopup from './CardPopup.jsx'
+import SimpleDataList from '../common/SimpleDataList.jsx';
+import VoteButtons from './VoteButtons.jsx';
 
 const YesNo = React.createClass({
     render: function() {
         var props = this.props,
             cards = props.cards,
-            openedCard = cards.find((c) => c.get('id') === this.props.openedCardId),
-            cardItems = cards.map((c) => <ListItem onItemTitleClick={props.setOpenedCardId} onVoteButtonClick={props.cardVote}
-                                                   key={c.get('id')} data={c} />);
+            itemRightControlsGetter = (c) => <VoteButtons yesCount={c.get('yesCount')} noCount={c.get('noCount')} vote={c.get('vote')}
+                onVoteButtonClick={(vote) => props.cardVote(c.get('id'), vote)}/>;
 
-        return <div>
-            {cardItems}
-            {openedCard && <CardPopup onVoteButtonClick={props.cardVote} onCloseButtonClick={() => props.setOpenedCardId(null)}
-                data={openedCard} />}
-        </div>;
+        return <SimpleDataList items={cards} itemRightControlsGetter={itemRightControlsGetter}/>
     }
 });
 

@@ -64,6 +64,10 @@ ul {
 
 /* /Reset CSS */
 
+body {
+    font-size: 60px;
+}
+
 html,
 body,
 div#Root {
@@ -104,6 +108,21 @@ span.icon {
 $mainBlueColor: #14A3E9;
 
 /* /Constants */
+
+/* SimpleDataList */
+.simple-data-list > li {
+    display: block;
+    border: 2px solid $mainBlueColor;
+    border-radius: 0.125em;
+    padding: 0.25em;
+    margin: 0.25em;
+    overflow: auto;
+
+    .right-controls {
+        float: right;
+    }
+}
+/* /SimpleDataList */
 
 /* Popup */
 
@@ -156,7 +175,7 @@ $mainBlueColor: #14A3E9;
 
 /* Popup */
 
-/* Progress bar */
+/* ProgressBar */
 
 .progress-bar {
     border: 1px solid black;
@@ -178,4 +197,4 @@ $mainBlueColor: #14A3E9;
     }
 }
 
-/* /Progress bar */
+/* /ProgressBar */

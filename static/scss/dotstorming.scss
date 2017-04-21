@@ -4,16 +4,8 @@ body {
     font-size: 40px;
 }
 
-.dotstorming-card {
-    border: 2px solid $mainBlueColor;
-    border-radius: 0.125em;
-    padding: 0.25em;
-    margin: 0.25em;
-    overflow: auto;
-
-    .dot {
-        float: left;
-    }
+.simple-data-list li .dot {
+    float: left;
 }
 
 .dot {
