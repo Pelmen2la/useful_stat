@@ -20,8 +20,16 @@ function parseCookie(cookieStr) {
     return cookie.parse(cookieStr);
 };
 
+function apply(obj0, obj1) {
+    for(var key in obj1) {
+        obj1.hasOwnProperty(key) && (obj0[key] = obj1[key]);
+    }
+    return obj0;
+};
+
 module.exports = {
     getUid: getUid,
     getGuid: getGuid,
-    parseCookie: parseCookie
+    parseCookie: parseCookie,
+    apply: apply
 };

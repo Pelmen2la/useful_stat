@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
-    requireTree = require('require-tree'),
-    models = requireTree('../models');
+    models = require('./../models/');
 
 module.exports = function (app) {
+    models.init();
     mongoose.connect('mongodb://localhost:27017/efficiency');
 };
