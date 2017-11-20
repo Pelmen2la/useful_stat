@@ -9,8 +9,7 @@ const YesNo = React.createClass({
         var props = this.props,
             cards = props.cards,
             itemRightControlsGetter = (c) => <VoteButtons yesCount={c.get('yesCount')} noCount={c.get('noCount')} vote={c.get('vote')}
-                onVoteButtonClick={(vote) => props.cardVote(c.get('id'), vote)}/>;
-
+                isResultVisible={props.showResultsBeforeVote || c.get('vote')} onVoteButtonClick={(vote) => props.cardVote(c.get('id'), vote)}/>;
         return <SimpleDataList items={cards} itemRightControlsGetter={itemRightControlsGetter}/>
     }
 });
@@ -18,6 +17,7 @@ const YesNo = React.createClass({
 function mapStateToProps(state) {
     return {
         cards: state ? state.get('cards') : [],
+        showResultsBeforeVote: state && state.get('showResultsBeforeVote'),
         openedCardId: state ? state.get('openedCardId') : null
     };
 }

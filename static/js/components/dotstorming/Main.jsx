@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../../action_creators/dotstorming.js';
 import SimpleDataList from '../common/SimpleDataList.jsx';
 import Dots from './Dots.jsx';
-import utils from './../../utils/appUtils.js';
 
 const Dotstorming = React.createClass({
     render: function() {
@@ -14,8 +13,9 @@ const Dotstorming = React.createClass({
                 return res + card.get('userDotsCount');
             }, 0),
             userDotsLimitReached = userDotsCount >= props.maxDotsCount,
+            showResultDots = props.showResultsBeforeVote || userDotsLimitReached,
             itemBottomControlsGetter = (c) => <Dots hasAddDotButton={!userDotsLimitReached} onAddDotButtonClick={props.addDot}
-                                                   onRemoveDotButtonClick={props.removeDot} key={c.get('id')} data={c}/>;
+                    onRemoveDotButtonClick={props.removeDot} key={c.get('id')} showResultDots={showResultDots} data={c}/>;
 
         return <div>
             <SimpleDataList items={cards} itemBottomControlsGetter={itemBottomControlsGetter}/>
@@ -31,6 +31,7 @@ function mapStateToProps(state) {
     return {
         cards: state ? state.get('cards') : [],
         userDotsLimitReached: state && state.get('userDotsLimitReached'),
+        showResultsBeforeVote: state && state.get('showResultsBeforeVote'),
         maxDotsCount: state && state.get('maxDotsCount')
     };
 }

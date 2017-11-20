@@ -12,8 +12,8 @@ const SimpleVote = React.createClass({
             totalVotesCount = cards.reduce((prev, current) => { return prev + current.get('voteCount') }, 0),
             itemRightControlsGetter = (c) => <span className={'vote-button icon' + (c.get('voted') ? ' check' : '')}
                                                    onClick={() => !c.get('voted') && props.voteCard(c.get('id')) }/>,
-            itemBottomControlsGetter = (c) => <ProgressBar text={ c.get('voteCount') + ' / ' + totalVotesCount }
-                                                           progress={ c.get('voteCount') / totalVotesCount }/>;
+            itemBottomControlsGetter = (c) => props.showResult ? <ProgressBar text={ c.get('voteCount') + ' / ' + totalVotesCount }
+                                                           progress={ c.get('voteCount') / totalVotesCount }/> : '';
 
         return <SimpleDataList items={cards} itemRightControlsGetter={itemRightControlsGetter}
                                itemBottomControlsGetter={itemBottomControlsGetter}/>;
@@ -23,7 +23,8 @@ const SimpleVote = React.createClass({
 function mapStateToProps(state) {
     return {
         cards: state ? state.get('cards') : [],
-        voteCardId: state && state.get('voteCardId')
+        voteCardId: state && state.get('voteCardId'),
+        showResult: state && state.get('showResult')
     };
 }
 

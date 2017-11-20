@@ -16,6 +16,10 @@
         xhr.send(data ? 'data=' + JSON.stringify(data) : null);
     };
 
+    function gBId(id) {
+        return document.getElementById(id)
+    };
+
     function deepClone(node) {
         var newNode = node.cloneNode();
         ['onclick', 'onkeyup'].forEach(function(event) {
@@ -45,7 +49,7 @@
     };
 
     function getCardTextInputsContainer() {
-        return document.getElementById('CardInputsContainer');
+        return gBId('CardInputsContainer');
     };
 
     function getCardTextInputsTexts() {
@@ -78,7 +82,7 @@
 
     function ensureCreateButtonState() {
         function setButtonDisabled(isDisabled) {
-            document.getElementById('CreateStatButton')[isDisabled ? 'setAttribute' : 'removeAttribute']('disabled', true);
+            gBId('CreateStatButton')[isDisabled ? 'setAttribute' : 'removeAttribute']('disabled', true);
         }
 
         setButtonDisabled((me.statId && me.statId.length >= 4 && !me.isIdFree) || getCardTextInputsTexts().length == 0);
@@ -116,13 +120,14 @@
         var settingsNode = document.querySelector(CARD_TITLE_WRAPPER_CSS_CLASS_SELECTOR),
             clone = deepClone(settingsNode);
         clone.querySelector('input').value = '';
-        document.getElementById('CardInputsContainer').appendChild(clone);
+        gBId('CardInputsContainer').appendChild(clone);
         ensureButtonsState();
     };
 
     function onCreateStatButtonClick() {
         var data = {
             cardsText: getCardTextInputsTexts(),
+            showResultsBeforeVote: gBId('ShowResultsBeforeVoteCheckbox').checked,
             id: me.statId
         };
         document.querySelectorAll('[data-statTypeDepended=' + me.selectedStatType + ']').forEach(function(i) {
@@ -153,12 +158,12 @@
     };
     
     function setErrorLabelVisible(errorName, isVisible) {
-        var label = document.getElementById(errorName + 'ErrorLabel');
+        var label = gBId(errorName + 'ErrorLabel');
         label.innerHTML = isVisible ? label.dataset.message : '';
     };
 
     function ensureStatTypesNodesStatus() {
-        for(var child, i = 0; child = document.getElementById('StastTypesContainer').children[i]; i++) {
+        for(var child, i = 0; child = gBId('StastTypesContainer').children[i]; i++) {
             if(child.dataset.stattype === me.selectedStatType) {
                 if(child.src.indexOf(SELECTED_IMAGE_POSTFIX) === -1) {
                     var srcPaths = child.src.split('/'),
@@ -183,11 +188,11 @@
 
         document.querySelector(CARD_TITLE_WRAPPER_CSS_CLASS_SELECTOR + ' img').onclick = onRemoveCardTitleButtonClick;
         document.querySelector(CARD_TITLE_WRAPPER_CSS_CLASS_SELECTOR + ' input').onkeyup = onCardTitleInputKeyUp;
-        document.getElementById('StatIdInput').onkeyup = onStatIdInputKeyUp;
-        document.getElementById('AddCardInputButton').onclick = onAddCardInputButtonClick;
-        document.getElementById('CreateStatButton').onclick = onCreateStatButtonClick;
-        document.getElementById('LanguagesSelectorContainer').onclick = onLanguageSelectorContainerClick;
-        document.getElementById('StastTypesContainer').onclick = onStatTypesContainerClick;
+        gBId('StatIdInput').onkeyup = onStatIdInputKeyUp;
+        gBId('AddCardInputButton').onclick = onAddCardInputButtonClick;
+        gBId('CreateStatButton').onclick = onCreateStatButtonClick;
+        gBId('LanguagesSelectorContainer').onclick = onLanguageSelectorContainerClick;
+        gBId('StastTypesContainer').onclick = onStatTypesContainerClick;
     };
 }());
 

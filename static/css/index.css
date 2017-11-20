@@ -70,11 +70,6 @@ button {
 	margin: 0.5em 0;
 }
 
-input {
-	width: 100%;
-	text-indent: 0.166666em;
-}
-
 button[disabled] {
 	cursor: auto;
 	opacity: 0.5;
@@ -100,10 +95,21 @@ button[disabled] {
 
 input {
     height: 1.2em;
-    display: block;
     margin: 0.5em 0;
 	box-sizing: border-box;
 }
+
+input[type=text] {
+	width: 100%;
+	text-indent: 0.166666em;
+	display: block;
+}
+
+input[type=checkbox] {
+	width: 1.2em;
+	vertical-align: middle;
+}
+
 
 .card-inputs-container .card-title-wrapper img {
 	display: none;

@@ -19,6 +19,7 @@ socket.on('connect', function() {
         });
         store.dispatch(setState({
                 cards: state.cards,
+                showResultsBeforeVote: state.showResultsBeforeVote,
                 statId: state.id
             })
         );

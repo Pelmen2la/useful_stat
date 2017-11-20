@@ -1,7 +1,7 @@
 var utils = require('./Utils');
 
 function createCardsStatEntry(model, data, cardDefaults) {
-    var cards = data.cardsText.map(function(text) {
+    data.cards = data.cardsText.map(function(text) {
         var card = {
             id: utils.getUid(),
             title: text
@@ -11,11 +11,10 @@ function createCardsStatEntry(model, data, cardDefaults) {
         }
         return card;
     });
-    return new model({
-        id: data.id || utils.getUid(),
-        date: new Date(),
-        cards: cards
-    });
+    delete data.cardsText;
+    data.date = new Date();
+    !data.id && (data.id = utils.getUid());
+    return new model(data);
 };
 
 module.exports = {

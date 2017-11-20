@@ -26,11 +26,17 @@
     </div>
     <button id="AddCardInputButton">{{ADD_CARD_BUTTON_TEXT}}</button>
     <br>
+
+    <input name="showResultsBeforeVote" id="ShowResultsBeforeVoteCheckbox" type="checkbox">
+    <label for="ShowResultsBeforeVoteCheckbox">{{SHOW_RESULTS_BEFORE_VOTE_CHECKBOX_PLACEHOLDER}}</label>
+
     <input data-statTypeDepended="dotstorming"  name="maxDotsCount" placeholder="{{MAX_DOTS_COUNT_INPUT_PLACEHOLDER}}" type="text">
+
     <input id="StatIdInput" placeholder="{{STAT_ID_INPUT_PLACEHOLDER}}" type="text">
     <span id="IdLengthErrorLabel" class="error-label" data-message="{{ID_LENGTH_ERROR}}"></span>
     <span id="IdNotFreeErrorLabel" class="error-label" data-message="{{ID_NOT_FREE_ERROR}}"></span>
     <br>
+
     <button id="CreateStatButton">{{CREATE_STAT_BUTTON_TEXT}}</button>
 
     <link rel="stylesheet" type="text/css" href="../css/index.css">

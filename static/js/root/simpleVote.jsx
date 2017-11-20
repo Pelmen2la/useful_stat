@@ -14,11 +14,14 @@ const store = createStore(reducer);
 
 socket.on('connect', function() {
     socket.on('state', function(state) {
+        var hasVotedCard = false;
         state.cards.forEach(function(c) {
             c.voted = utils.getItemPropertyCache(c.id, 'voted') || false;
+            hasVotedCard = hasVotedCard || c.voted;
         });
         store.dispatch(setState({
                 cards: state.cards,
+                showResult: state.showResultsBeforeVote || hasVotedCard,
                 statId: state.id
             })
         );

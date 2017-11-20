@@ -5,6 +5,7 @@ function addModel(name, modelCfg, cardsCfg) {
     var model = new mongoose.Schema(utils.apply({
         id: String,
         date: Date,
+        showResultsBeforeVote: Boolean,
         cards: [
             utils.apply({
                 id: String,
