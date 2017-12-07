@@ -8,9 +8,9 @@ export default React.createClass({
             data = this.props.data,
             items = <div>
                 <p>{data.get('title')}</p>
-                <RatingControl cssClass="time" value={data.get('efficiencyRate')}
+                <RatingControl cssClass="perfomance" value={data.get('efficiencyRate')}
                                onValueChanged={(val) => props.onPropertyRateChange(data.get('id'), 'efficiency', val)}/>
-                <RatingControl cssClass="perfomance" value={data.get('timeCostRate')}
+                <RatingControl cssClass="time" value={data.get('timeCostRate')}
                                onValueChanged={(val) => props.onPropertyRateChange(data.get('id'), 'timeCost', val)}/>
             </div>;
 

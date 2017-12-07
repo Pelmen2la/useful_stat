@@ -7,8 +7,10 @@ import * as actionCreators from '../../action_creators/efficiency.js';
 
 const Efficiency = React.createClass({
     render: function() {
-        var cards = this.props.cards,
-            cardItems = cards.map((c, i) => <SmallCard data={c} setOpenedCardId={this.props.setOpenedCardId} key={c.get('id')}/>),
+        var props = this.props,
+            cards = props.cards,
+            cardItems = cards.map((c, i) => <SmallCard data={c} setOpenedCardId={this.props.setOpenedCardId} key={c.get('id')}
+                      showResult={props.showResultsBeforeVote || (c.get('timeCostRate') && c.get('efficiencyRate'))} />),
             openedCard = cards.find((c) => c.get('id') === this.props.openedCardId),
             gridLayoutItems = getGridLayoutItems();
 
@@ -50,7 +52,8 @@ function mapStateToProps(state) {
     return {
         cards: state ? state.get('cards') : [],
         openedCardId: state ? state.get('openedCardId') : null,
-        cardListVisibility: state ? state.get('cardListVisibility') : false
+        cardListVisibility: state ? state.get('cardListVisibility') : false,
+        showResultsBeforeVote: state && state.get('showResultsBeforeVote')
     };
 }
 

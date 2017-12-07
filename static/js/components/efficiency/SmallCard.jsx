@@ -6,20 +6,25 @@ export default React.createClass({
         var props = this.props,
             data = props.data,
             averageEfficiencyRate = utils.getListAverage(data.get('efficiencyRates')),
-            averageTimeCostRate = utils.getListAverage(data.get('timeCostRates'));
+            averageTimeCostRate = utils.getListAverage(data.get('timeCostRates')),
+            resultJsx =
+                <div>
+                    <div className="param-block">
+                        <span className="icon time"></span>
+                        {averageTimeCostRate}
+                    </div>
+                    <div className="param-block">
+                        <span className="icon perfomance"></span>
+                        {averageEfficiencyRate}
+                    </div>
+                </div>;
 
-        return <div style={getPositionStyles(averageEfficiencyRate, averageTimeCostRate)}
+
+        return <div style={getPositionStyles(props.showResult ? averageEfficiencyRate : 0, props.showResult ? averageTimeCostRate : 0)}
                     className={"card " + (data.get('isHidden') ? 'hidden' : '')} onClick={() => props.setOpenedCardId(data.get('id'), true)}>
             <p>{data.get('title')}</p>
 
-            <div className="param-block">
-                <span className="icon time"></span>
-                {averageTimeCostRate}
-            </div>
-            <div className="param-block">
-                <span className="icon perfomance"></span>
-                {averageEfficiencyRate}
-            </div>
+            { props.showResult ? resultJsx : ''}
         </div>
     }
 });
