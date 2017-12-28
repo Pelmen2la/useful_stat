@@ -15,7 +15,8 @@ const Dotstorming = React.createClass({
             userDotsLimitReached = userDotsCount >= props.maxDotsCount,
             showResultDots = props.showResultsBeforeVote || userDotsLimitReached,
             itemBottomControlsGetter = (c) => <Dots hasAddDotButton={!userDotsLimitReached} onAddDotButtonClick={props.addDot}
-                    onRemoveDotButtonClick={props.removeDot} key={c.get('id')} showResultDots={showResultDots} data={c}/>;
+                    onRemoveDotButtonClick={props.removeDot} key={c.get('id')} showResultDots={showResultDots} data={c}
+                    canRemoveDot={props.allowRevote}/>;
 
         return <div>
             <SimpleDataList items={cards} itemBottomControlsGetter={itemBottomControlsGetter}/>
@@ -32,7 +33,8 @@ function mapStateToProps(state) {
         cards: state ? state.get('cards') : [],
         userDotsLimitReached: state && state.get('userDotsLimitReached'),
         showResultsBeforeVote: state && state.get('showResultsBeforeVote'),
-        maxDotsCount: state && state.get('maxDotsCount')
+        maxDotsCount: state && state.get('maxDotsCount'),
+        allowRevote: state && state.get('allowRevote')
     };
 }
 

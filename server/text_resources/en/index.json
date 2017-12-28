@@ -6,6 +6,7 @@
     "ID_NOT_FREE_ERROR": "Id already exists",
     "CREATE_STAT_BUTTON_TEXT": "Create stat",
 
-    "SHOW_RESULTS_BEFORE_VOTE_CHECKBOX_PLACEHOLDER" : "Show results before vote",
+    "SHOW_RESULTS_BEFORE_VOTE_CHECKBOX_LABEL" : "Show results before vote",
+    "ALLOW_REVOTE_CHECKBOX_LABEL": "Allow revote",
     "MAX_DOTS_COUNT_INPUT_PLACEHOLDER": "Dots count (default 10)"
 }

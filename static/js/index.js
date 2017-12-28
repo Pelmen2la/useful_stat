@@ -128,6 +128,7 @@
         var data = {
             cardsText: getCardTextInputsTexts(),
             showResultsBeforeVote: gBId('ShowResultsBeforeVoteCheckbox').checked,
+            allowRevote: gBId('AllowRevoteCheckbox').checked,
             id: me.statId
         };
         document.querySelectorAll('[data-statTypeDepended=' + me.selectedStatType + ']').forEach(function(i) {

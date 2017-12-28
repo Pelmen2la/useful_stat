@@ -6,6 +6,7 @@
     "ID_NOT_FREE_ERROR": "Данный ID уже занят",
     "CREATE_STAT_BUTTON_TEXT": "Создать опрос",
 
-    "SHOW_RESULTS_BEFORE_VOTE_CHECKBOX_PLACEHOLDER" : "Показать результат до голосования",
+    "SHOW_RESULTS_BEFORE_VOTE_CHECKBOX_LABEL" : "Показать результат до голосования",
+    "ALLOW_REVOTE_CHECKBOX_LABEL": "Разрешить изменять решение",
     "MAX_DOTS_COUNT_INPUT_PLACEHOLDER": "Количество точек (по-умолчанию 10)"
 }

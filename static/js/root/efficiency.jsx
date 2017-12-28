@@ -20,6 +20,7 @@ socket.on('connect', function() {
         });
         store.dispatch(setState({
                 cards: state.cards,
+                allowRevote : state.allowRevote,
                 graphId: state.id
             })
         );

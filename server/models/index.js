@@ -6,6 +6,7 @@ function addModel(name, modelCfg, cardsCfg) {
         id: String,
         date: Date,
         showResultsBeforeVote: Boolean,
+        allowRevote: Boolean,
         cards: [
             utils.apply({
                 id: String,

@@ -26,7 +26,7 @@ const Efficiency = React.createClass({
             </div>
 
             {openedCard ? <CardForm data={openedCard} onPropertyRateChange={this.props.setCardPropertyRate}
-                onFormClose={() => this.props.setOpenedCardId(null)}></CardForm> : ''}
+                onFormClose={() => this.props.setOpenedCardId(null)} allowRevote={props.allowRevote}></CardForm> : ''}
 
             {this.props.cardListVisibility ? <CardsList cards={cards} onClose={() => this.props.setCardListVisibility(false)}
                 onToggleCardVisibilityButtonClick={this.props.toggleCardVisibility}
@@ -53,7 +53,8 @@ function mapStateToProps(state) {
         cards: state ? state.get('cards') : [],
         openedCardId: state ? state.get('openedCardId') : null,
         cardListVisibility: state ? state.get('cardListVisibility') : false,
-        showResultsBeforeVote: state && state.get('showResultsBeforeVote')
+        showResultsBeforeVote: state && state.get('showResultsBeforeVote'),
+        allowRevote: state && state.get('allowRevote')
     };
 }
 

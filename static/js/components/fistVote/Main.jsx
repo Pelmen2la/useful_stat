@@ -10,9 +10,10 @@ const FistVote = React.createClass({
     render: function() {
         var props = this.props,
             cards = props.cards,
-            itemRightControlsGetter = (c) => props.showResultsBeforeVote || c.get('vote') ?
+            itemRightControlsGetter = (c) => props.showResultsBeforeVote || c.get('vote') !== undefined ?
                 <FistIcon isActive={true} index={Math.round(utils.getListAverage(c.get('votes')))}/> : '',
-            itemBottomControlsGetter = (c) => <VoteButtons onVoteButtonClick={props.cardVote} data={c}/>;
+            itemBottomControlsGetter = (c) =>
+                <VoteButtons onVoteButtonClick={c.get('vote') === undefined || props.allowRevote ? props.cardVote : () => false} data={c}/>;
 
         return <SimpleDataList items={cards} itemRightControlsGetter={itemRightControlsGetter}
             itemBottomControlsGetter={itemBottomControlsGetter}/>;
@@ -22,7 +23,8 @@ const FistVote = React.createClass({
 function mapStateToProps(state) {
     return {
         cards: state ? state.get('cards') : [],
-        showResultsBeforeVote: state && state.get('showResultsBeforeVote')
+        showResultsBeforeVote: state && state.get('showResultsBeforeVote'),
+        allowRevote: state && state.get('allowRevote')
     };
 }
 

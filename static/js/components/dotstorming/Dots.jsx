@@ -13,7 +13,7 @@ export default React.createClass({
             var isUserDot = dostCount - i <= data.get('userDotsCount'),
                 showDot = isUserDot || (props.showResultDots);
             showDot && dots.push(<li key={i} className={'dot ' + (isUserDot ? 'user-dot' : '')}
-                          onClick={isUserDot ? () => props.onRemoveDotButtonClick(id) : null}/>);
+                          onClick={props.canRemoveDot && isUserDot ? () => props.onRemoveDotButtonClick(id) : null}/>);
         }
         props.hasAddDotButton && dots.push(<li key={dostCount} className={'dot add-dot'}
                                                onClick={() => props.onAddDotButtonClick(id)}/>);
